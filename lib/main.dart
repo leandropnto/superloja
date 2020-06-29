@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 
-  Firestore.instance.collection("teste").add({"nome": "Leandro"});
+  Firestore.instance.collection("teste").add({"nome": "Leandro iOS"});
 }
 
 class MyApp extends StatelessWidget {
