@@ -30,6 +30,17 @@ class LoginPage extends StatelessWidget {
               height: 16,
             ),
             const InputPasswordWidget(),
+            Align(
+              alignment: Alignment.topRight,
+              child: FlatButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
+                child: const Text(
+                  'esqueci minha senha',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
             const SizedBox(
               height: 8,
             ),
