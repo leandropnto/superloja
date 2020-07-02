@@ -1,17 +1,12 @@
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class ValueFailure {
-  const factory ValueFailure.invalidEmail(String email) = InvalidEmail;
-  const factory ValueFailure.invalidPassword(String password) = InvalidPassword;
+part 'failures.freezed.dart';
+
+@freezed
+abstract class ValueFailure with _$ValueFailure{
+  const factory ValueFailure.invalidEmail(String email) = _InvalidEmail;
+  const factory ValueFailure.invalidPassword(String password) = _InvalidPassword;
+  const factory ValueFailure.shortName(String name) = _ShortName;
 }
 
-class InvalidEmail implements ValueFailure {
-  final String email;
-  const InvalidEmail(this.email);
-}
-
-class InvalidPassword implements ValueFailure {
-  final String password;
-  const InvalidPassword(this.password);
-}

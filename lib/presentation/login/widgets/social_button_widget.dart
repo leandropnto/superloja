@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class LoginButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -18,8 +19,8 @@ class LoginButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: onTap,
-        icon: Icon(Icons.face),
-        label: const Text('facebook'),
+        icon: Icon(FontAwesome.sign_in),
+        label: const Text('ACESSAR'),
         textColor: Colors.white,
       ),
     );
@@ -44,7 +45,7 @@ class FacebookButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: onTap,
-        icon: Icon(Icons.face),
+        icon: Icon(FontAwesome.facebook),
         label: const Text('facebook'),
         textColor: Colors.white,
       ),
@@ -70,7 +71,7 @@ class GoogleButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: onTap,
-        icon: Icon(Icons.face),
+        icon: Icon(FontAwesome.google),
         label: const Text('Google'),
         textColor: Colors.white,
       ),

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class InputEmailWidget extends StatelessWidget {
+  final Function(String) onChanged;
+  final String error;
+
   const InputEmailWidget({
     Key key,
+    this.onChanged,
+    this.error,
   }) : super(key: key);
 
   @override
@@ -15,17 +20,15 @@ class InputEmailWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: const TextField(
+      child: TextField(
+        onChanged: onChanged,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
             fillColor: Colors.white,
             focusColor: Colors.white,
             border: InputBorder.none,
-            prefixIcon: Icon(
-              Icons.email,
-              //color: Colors.white,
-            ),
-            errorText: "Informe o e-mail",
+            prefixIcon: Icon(Icons.email),
+            errorText: error,
             hintText: 'E-mail'),
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -23,17 +22,6 @@ class Background extends StatelessWidget {
               width: size.width * 0.35,
             ),
           ),
-          Positioned(
-              top: 22,
-              left: 0,
-              child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  })),
           Positioned(
             bottom: 0,
             right: 0,

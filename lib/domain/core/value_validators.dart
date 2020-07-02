@@ -15,13 +15,24 @@ Either<ValueFailure, String> validateEmailAddress(String input) {
 }
 
 Either<ValueFailure, String> validateMinPassword(String input) {
-  return input.length < 6
+  return input.length >= 6
       ? right(input)
       : left(ValueFailure.invalidPassword(input));
 }
 
 Either<ValueFailure, String> validateMaxPassword(String input) {
-  return input.length > 10
+  return input.length <= 10
       ? right(input)
       : left(ValueFailure.invalidPassword(input));
+}
+
+Either<ValueFailure, String> validateName(String input) {
+  const nameRegex = r"""[\w{2}+]\s[\w{2+}]""";
+  if (RegExp(nameRegex).hasMatch(input)) {
+    return right(input);
+  } else {
+    return left(
+      ValueFailure.shortName(input),
+    );
+  }
 }

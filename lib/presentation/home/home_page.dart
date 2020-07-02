@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/custom_drawer.dart';
+import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage();

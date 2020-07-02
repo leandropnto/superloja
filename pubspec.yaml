@@ -23,6 +23,11 @@ dependencies:
   dartz: ^0.9.1
   # gerador de UUID
   uuid: ^2.1.0
+  #data class e Sealed
+  freezed_annotation: ^0.11.0
+  flutter_icons: ^1.1.0
+  #google signin
+  google_sign_in: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +35,7 @@ dev_dependencies:
   lint: ^1.0.0
   build_runner: 1.10.0
   injectable_generator: ^0.4.1
+  freezed: ^0.11.2
 
 # The following section is specific to Flutter.
 flutter:

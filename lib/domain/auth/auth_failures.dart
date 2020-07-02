@@ -1,36 +1,19 @@
-import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class AuthFailure {
-  static const cancelledByUser = CancelledByUser._();
-  static const serverError = ServerError._();
-  static const emailAlreadyInUse = EmailAlreadyInUse._();
-  static const invalidEmailAndPasswordCombination =
-      InvalidEmailAndPasswordCombination._();
-  static const userDisabled = UserDisabled._();
-  static const userNotFound = UserNotFound._();
-}
+part 'auth_failures.freezed.dart';
 
-class CancelledByUser implements AuthFailure {
-  const CancelledByUser._();
-}
+@freezed
+abstract class AuthFailures with _$AuthFailures {
+  const factory AuthFailures.cancelledByUser() = CancelledByUser;
 
-class ServerError implements AuthFailure {
-  const ServerError._();
-}
+  const factory AuthFailures.serverError() = ServerError;
 
-class EmailAlreadyInUse implements AuthFailure {
-  const EmailAlreadyInUse._();
-}
+  const factory AuthFailures.emailAlreadyInUse() = EmailAlreadyInUse;
 
-class InvalidEmailAndPasswordCombination implements AuthFailure {
-  const InvalidEmailAndPasswordCombination._();
-}
+  const factory AuthFailures.invalidEmailAndPasswordCombination() =
+      InvalidEmailAndPasswordCombination;
 
-class UserDisabled implements AuthFailure {
-  const UserDisabled._();
-}
+  const factory AuthFailures.userDisabled() = UserDisabled;
 
-class UserNotFound implements AuthFailure {
-  const UserNotFound._();
+  const factory AuthFailures.userNotFound() = UserNotFound;
 }
