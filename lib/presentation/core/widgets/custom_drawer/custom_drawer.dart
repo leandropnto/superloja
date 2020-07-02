@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/drawer_tile.dart';
-import 'package:superloja/presentation/login/login_page.dart';
+import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DrawerBloc, DrawerState>(
-      listener: (BuildContext context, DrawerState state) {},
+      listener: (BuildContext context, DrawerState state) {
+        if (state.page == 9) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => SignInPage()));
+        }
+      },
       builder: (BuildContext context, DrawerState state) {
         return Drawer(
           child: SafeArea(
@@ -20,7 +25,9 @@ class CustomDrawer extends StatelessWidget {
                   title: "Início",
                   page: 0,
                   onTap: () {
-                    context.bloc<DrawerBloc>().add(DrawerEvent.homePressed());
+                    context
+                        .bloc<DrawerBloc>()
+                        .add(const DrawerEvent.homePressed());
                   },
                 ),
                 DrawerTile(
@@ -30,10 +37,10 @@ class CustomDrawer extends StatelessWidget {
                   onTap: () {
                     context
                         .bloc<DrawerBloc>()
-                        .add(DrawerEvent.productsPressed());
+                        .add(const DrawerEvent.productsPressed());
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => SignInPage(),
                       ),
                     );
                   },
@@ -47,6 +54,14 @@ class CustomDrawer extends StatelessWidget {
                   iconData: Icons.location_on,
                   page: 3,
                   title: "Lojas",
+                ),
+                DrawerTile(
+                  iconData: Icons.exit_to_app,
+                  page: 9,
+                  title: "Sair",
+                  onTap: () => context
+                      .bloc<DrawerBloc>()
+                      .add(const DrawerEvent.exitPressed()),
                 ),
               ],
             ),

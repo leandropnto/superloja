@@ -28,6 +28,8 @@ dependencies:
   flutter_icons: ^1.1.0
   #google signin
   google_sign_in: ^4.5.1
+  #flusbar
+  flushbar: ^1.10.4
 
 dev_dependencies:
   flutter_test:

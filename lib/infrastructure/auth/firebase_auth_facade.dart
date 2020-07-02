@@ -2,12 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 import 'package:superloja/domain/auth/auth_failures.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/auth/user.dart';
 import 'package:superloja/domain/auth/value_objects.dart';
 import 'package:superloja/domain/auth/firebase_user_mapper.dart';
 
+@Singleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
@@ -44,11 +46,11 @@ class FirebaseAuthFacade implements IAuthFacade {
     final email = emailAddress.getOrCrash();
     final pswd = password.getOrCrash();
     try {
-      _firebaseAuth.signInWithEmailAndPassword(email: email, password: pswd);
+      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: pswd);
       return right(unit);
     } on PlatformException catch (e) {
       return (e.code == 'ERROR_USER_NOT_FOUND' ||
-              e.code == 'ERROR_USER_NOT_FOUND')
+              e.code == 'ERROR_WRONG_PASSWORD')
           ? left(const AuthFailures.invalidEmailAndPasswordCombination())
           : left(const AuthFailures.serverError());
     }
