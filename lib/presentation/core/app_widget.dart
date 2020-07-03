@@ -8,7 +8,6 @@ import 'package:superloja/presentation/pages/splash/splash_page.dart';
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //FirebaseAuth.instance.signOut();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<DrawerBloc>()),
@@ -20,6 +19,21 @@ class AppWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Super Loja',
         theme: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.white),
+            fillColor: Colors.white,
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2)),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2)),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 2),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 2),
+            ),
+          ),
           primaryColor: const Color.fromARGB(255, 4, 125, 141),
           scaffoldBackgroundColor: const Color.fromARGB(255, 4, 125, 141),
           visualDensity: VisualDensity.adaptivePlatformDensity,

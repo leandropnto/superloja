@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/drawer_tile.dart';
 import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
+import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
+import 'package:superloja/presentation/pages/home/home_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -24,26 +26,14 @@ class CustomDrawer extends StatelessWidget {
                   iconData: Icons.home,
                   title: "Início",
                   page: 0,
-                  onTap: () {
-                    context
-                        .bloc<DrawerBloc>()
-                        .add(const DrawerEvent.homePressed());
-                  },
+                  navigate: () => const HomePage(),
                 ),
                 DrawerTile(
                   iconData: Icons.list,
                   page: 1,
                   title: "Produtos",
-                  onTap: () {
-                    context
-                        .bloc<DrawerBloc>()
-                        .add(const DrawerEvent.productsPressed());
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => SignInPage(),
-                      ),
-                    );
-                  },
+                  navigateReplace: () => SignInPage(),
+
                 ),
                 DrawerTile(
                   iconData: Icons.playlist_add_check,
@@ -56,12 +46,21 @@ class CustomDrawer extends StatelessWidget {
                   title: "Lojas",
                 ),
                 DrawerTile(
-                  iconData: Icons.exit_to_app,
-                  page: 9,
-                  title: "Sair",
-                  onTap: () => context
-                      .bloc<DrawerBloc>()
-                      .add(const DrawerEvent.exitPressed()),
+                  iconData: Icons.location_on,
+                  page: 4,
+                  title: "Cadastrar Usuário",
+                  navigate: () => SignUpPage(),
+                ),
+                DrawerTile(
+                    iconData: Icons.exit_to_app,
+                    page: 9,
+                    title: "Sair",
+                    navigateReplace: () {
+                      context
+                          .bloc<DrawerBloc>()
+                          .add(const DrawerEvent.exitPressed());
+                          return SignInPage();
+                    }
                 ),
               ],
             ),

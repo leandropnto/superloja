@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:superloja/injection.dart';
+import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
 import 'package:superloja/presentation/pages/home/home_page.dart';
 import 'package:superloja/presentation/pages/auth/signin/widgets/input_email_widget.dart';
 import 'package:superloja/presentation/pages/auth/signin/widgets/input_password_widget.dart';
@@ -35,18 +36,19 @@ class SignInPage extends StatelessWidget {
                         serverError: (_) => "Ops... Ocorreu um erro",
                         emailAlreadyInUse: (_) => "Email em uso",
                         invalidEmailAndPasswordCombination: (_) =>
-                        "email ou senha inválidos",
+                            "email ou senha inválidos",
                         userDisabled: (value) => "Usuario desabilitado",
                         userNotFound: (value) => "Usuário nao encontrado",
                       ),
                     ).show(context);
-                  }, (_) => {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    )
-                  });
+                  },
+                      (_) => {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            )
+                          });
                 },
               );
             },
@@ -107,13 +109,18 @@ class SignInPage extends StatelessWidget {
                         const SizedBox(
                           height: 30,
                         ),
-                        Text(
-                          'Ou crie a sua conta',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5
-                              .copyWith(color: Colors.redAccent),
-                          textAlign: TextAlign.center,
+                        FlatButton(
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage())),
+                          child: Text(
+                            'Ou crie a sua conta',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                .copyWith(color: Colors.redAccent),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),
