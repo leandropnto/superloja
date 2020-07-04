@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:superloja/presentation/core/widgets/rounded_input_field.dart';
 
 class InputEmailWidget extends StatelessWidget {
-
   const InputEmailWidget({
     Key key,
   }) : super(key: key);
@@ -23,23 +23,16 @@ class InputEmailWidget extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          child: TextField(
+          child: RoundedInputField(
             enabled: !state.isSubmitting,
-            autocorrect: false,
-            onChanged: (value) =>
-                context.bloc<SignInFormBloc>().add(
-                    SignInFormEvent.emailChanged(value)),
+            onChanged: (value) => context
+                .bloc<SignInFormBloc>()
+                .add(SignInFormEvent.emailChanged(value)),
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-                fillColor: Colors.white,
-                focusColor: Colors.white,
-                border: InputBorder.none,
-                prefixIcon: Icon(Icons.email),
-                errorText: state.showErrorMessages
-                    ? state.emailAddress.mapToErrorMessage(
-                    "Informe um email válido!")
-                    : null,
-                hintText: 'E-mail'),
+            errorText: state.showErrorMessages
+                ? state.emailAddress
+                    .mapToErrorMessage("Informe um email válido!")
+                : null,
           ),
         );
       },

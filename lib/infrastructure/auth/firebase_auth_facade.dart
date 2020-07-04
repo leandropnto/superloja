@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -8,31 +9,46 @@ import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/auth/user.dart';
 import 'package:superloja/domain/auth/value_objects.dart';
 import 'package:superloja/domain/auth/firebase_user_mapper.dart';
+import 'package:superloja/domain/core/value_objects.dart';
+import 'package:superloja/domain/user/i_user_facade.dart';
+import 'package:superloja/infrastructure/auth/user_dto.dart';
 
 @Singleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final IUserFacade _userFacade;
 
-  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn)
+  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn, this._userFacade)
       : assert(_firebaseAuth != null),
-        assert(_googleSignIn != null);
+        assert(_googleSignIn != null),
+        assert(_userFacade != null);
 
   @override
   Future<Option<User>> getSignedInUser() async {
     final firebaseUser = await _firebaseAuth.currentUser();
+    if (firebaseUser != null) {
+      final user = await _userFacade
+          .getUser(UniqueId.fromUniqueString(firebaseUser.uid));
+      return user.fold((l) => none(), (r) => some(r));
+    }
     return optionOf(firebaseUser?.toDomain());
   }
 
   @override
-  Future<Either<AuthFailures, Unit>> registerWithEmailAndPassword(
+  Future<Either<AuthFailures, User>> registerWithEmailAndPassword(
       {EmailAddress emailAddress, Password password}) async {
     final email = emailAddress.getOrCrash();
     final pswd = password.getOrCrash();
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: pswd);
-      return right(unit);
+      final user = User(
+        id: UniqueId.fromUniqueString(authResult.user.uid),
+        email: EmailAddress(authResult.user.email),
+        name: Name.from('Informe o nome'),
+      );
+      return right(user);
     } on PlatformException catch (e) {
       return (e.code == 'ERROR_EMAIL_ALREADY_IN_USE')
           ? left(const AuthFailures.emailAlreadyInUse())
@@ -41,13 +57,16 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailures, Unit>> signInWithEmailAndPassword(
+  Future<Either<AuthFailures, User>> signInWithEmailAndPassword(
       {EmailAddress emailAddress, Password password}) async {
     final email = emailAddress.getOrCrash();
     final pswd = password.getOrCrash();
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: pswd);
-      return right(unit);
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: pswd);
+      final firebaseUser = await _firebaseAuth.currentUser();
+      final document = await Firestore.instance.collection("users").document(firebaseUser.uid).get();
+      return right(UserDto.fromFirestore(document).toDomain());
     } on PlatformException catch (e) {
       return (e.code == 'ERROR_USER_NOT_FOUND' ||
               e.code == 'ERROR_WRONG_PASSWORD')

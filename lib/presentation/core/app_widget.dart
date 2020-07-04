@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/injection.dart';
+import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/pages/splash/splash_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -19,23 +20,8 @@ class AppWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Super Loja',
         theme: ThemeData(
-          inputDecorationTheme: InputDecorationTheme(
-            labelStyle: TextStyle(color: Colors.white),
-            hintStyle: TextStyle(color: Colors.white),
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 2),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 2),
-            ),
-          ),
-          primaryColor: const Color.fromARGB(255, 4, 125, 141),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 4, 125, 141),
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(
             elevation: 0,

@@ -36,3 +36,26 @@ Either<ValueFailure, String> validateName(String input) {
     );
   }
 }
+
+Either<ValueFailure, String> validateMinLenght(String input, int minLenght) {
+  return input.length >= minLenght
+      ? right(input)
+      : left(ValueFailure.shortInput(input));
+}
+
+Either<ValueFailure, String> validateMaxLenght(String input, int maxLenght) {
+  return input.length <= maxLenght
+      ? right(input)
+      : left(ValueFailure.shortInput(input));
+}
+
+Either<ValueFailure, String> validateFullName(String input) {
+  const nameRegex = r"""[\w{2}+]\s[\w{2+}]""";
+  if (RegExp(nameRegex).hasMatch(input)) {
+    return right(input);
+  } else {
+    return left(
+      ValueFailure.fullName(input),
+    );
+  }
+}

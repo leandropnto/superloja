@@ -47,3 +47,4 @@ app.*.map.json
 **/**.iconfig.dart
 **/**.freezed.dart
 **/**.lock
+**/**.g.dart

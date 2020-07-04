@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -13,7 +14,7 @@ part 'auth_state.dart';
 
 part 'auth_bloc.freezed.dart';
 
-@injectable
+@Singleton()
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
 
@@ -39,6 +40,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       signedOut: (e) async* {
         await _authFacade.signOut();
         yield const AuthState.unauthenticated();
+      },
+      refresh: (Refresh e) async* {
+        yield AuthState.authenticated(e.user);
       },
     );
   }

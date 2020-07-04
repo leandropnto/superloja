@@ -37,3 +37,19 @@ class UserName extends ValueObject<String> {
     return UserName._(validateName(name));
   }
 }
+
+class Name extends ValueObject<String> {
+  @override
+  final Either<ValueFailure, String> value;
+
+  const Name._(this.value);
+
+  factory Name.from(String strName) {
+    return Name._(
+      validateMinLenght(strName, 3)
+          .andThen(validateMaxLenght(strName, 100))
+          .flatMap(validateFullName)
+    );
+  }
+
+}

@@ -34,7 +34,8 @@ class DrawerTile extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => navigateReplace()));
             }
           },
-          child: SizedBox(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             height: 60,
             child: Row(
               children: <Widget>[

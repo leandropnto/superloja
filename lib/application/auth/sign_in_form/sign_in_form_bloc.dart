@@ -2,12 +2,16 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/domain/auth/auth_failures.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
+import 'package:superloja/domain/auth/user.dart';
 import 'package:superloja/domain/auth/value_objects.dart';
+import 'package:superloja/injection.dart';
 
 part 'sign_in_form_event.dart';
 
@@ -51,8 +55,13 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         final result = await _authFacade.signInWithEmailAndPassword(
             emailAddress: state.emailAddress, password: state.password);
 
+        result.fold((f) {}, (u) {
+          getIt<AuthBloc>().add(AuthEvent.refresh(user: u));
+        });
         yield state.copyWith(
             isSubmitting: false, authFailureOrSuccessOption: some(result));
+
+
       },
     );
   }
