@@ -58,7 +58,6 @@ class PasswordInput extends StatelessWidget {
         child: RoundedInputField(
           obscure: true,
           icon: FontAwesome.lock,
-          autocorrect: false,
           hintText: "Informe a senha",
           onChanged: (value) => context.bloc<SignUpFormBloc>().add(SignUpFormEvent.passwordChanged(value)),
           errorText: state.showErrorMessages

@@ -6,7 +6,6 @@ import 'package:superloja/domain/core/value_objects.dart';
 import 'package:superloja/domain/user/i_user_facade.dart';
 import 'package:superloja/domain/user/user_failures.dart';
 import 'package:superloja/infrastructure/auth/user_dto.dart';
-import 'package:superloja/infrastructure/core/firebase_helpers.dart';
 
 @Singleton(as: IUserFacade)
 class FirebaseUserFacade implements IUserFacade {
