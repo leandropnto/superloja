@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:superloja/domain/auth/user.dart';
 import 'package:superloja/domain/auth/value_objects.dart';
 import 'package:superloja/domain/core/value_objects.dart';
+import 'package:superloja/infrastructure/core/server_timestamp_converter.dart';
 
 part 'user_dto.freezed.dart';
 
@@ -41,16 +42,4 @@ abstract class UserDto implements _$UserDto {
   }
 
   const UserDto._();
-}
-
-class ServerTimestampConverter implements JsonConverter<FieldValue, Object> {
-  const ServerTimestampConverter();
-
-  @override
-  FieldValue fromJson(Object jsojsojson) {
-    return FieldValue.serverTimestamp();
-  }
-
-  @override
-  Object toJson(Object fieldValue) => fieldValue;
 }

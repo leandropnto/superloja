@@ -59,3 +59,31 @@ Either<ValueFailure, String> validateFullName(String input) {
     );
   }
 }
+
+
+Either<ValueFailure, num> validatePrice(String input) {
+  try{
+    final price = num.parse(input);
+    if (price <= 0.0) {
+      return left(ValueFailure.invalidNumber(input));
+    }
+    return right(price);
+  } on FormatException catch (e) {
+    return left(ValueFailure.invalidNumber(input));
+  }
+
+}
+
+Either<ValueFailure, int> validateStock(String input) {
+  try{
+    final size =  int.parse(input);
+    if (size < 0) {
+      return left(ValueFailure.invalidPositivNumber(input));
+    }
+
+    return right(size);
+  } on FormatException catch (e) {
+    return left(ValueFailure.invalidNumber(input));
+  }
+
+}

@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:superloja/application/product/product_form/product_form_bloc.dart';
+import 'package:superloja/domain/product/product.dart';
+import 'package:superloja/injection.dart';
+import 'package:superloja/presentation/core/constants.dart';
+import 'package:superloja/presentation/pages/product/product_form/product_form_page.dart';
+
+class ProductsWidget extends StatelessWidget {
+  final List<Product> products;
+
+  const ProductsWidget({Key key, this.products}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: const EdgeInsets.all(4),
+        itemCount: products.length,
+        itemBuilder: (_, index) {
+          final product = products[index];
+          return GestureDetector(
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) =>
+                BlocProvider<ProductFormBloc>(
+                  create: (context) => getIt<ProductFormBloc>()
+                  ..add(ProductFormEvent.loading(product)),
+                  child: const ProductFormPage(),
+                ),
+            )),
+            child: Card(
+              child: Container(
+                height: 100,
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 1,
+                      child: Image.network(
+                        product.images.first,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            product.name.value
+                                .fold((f) => "Nome inválido", (nome) => nome),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontSize: 16),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Text(
+                              'A partir de',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            product.minPrice.price.value.fold((l) => "Preço inválido", (r) => "R\$ ${r.toStringAsFixed(2)}"),
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: kPrimaryColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+}

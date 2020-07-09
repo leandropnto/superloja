@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
+import 'package:superloja/application/product/product_list/product_bloc.dart';
+import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/drawer_tile.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/header.dart';
 import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
 import 'package:superloja/presentation/pages/home/home_page.dart';
+import 'package:superloja/presentation/pages/product/product_list/product_list_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -33,8 +36,11 @@ class CustomDrawer extends StatelessWidget {
                 iconData: Icons.list,
                 page: 1,
                 title: "Produtos",
-                navigateReplace: () => SignInPage(),
-
+                navigateReplace: () => BlocProvider<ProductBloc>(
+                  create: (_) =>
+                      getIt<ProductBloc>()..add(const ProductEvent.watchAll()),
+                  child: ProductListPage(),
+                ),
               ),
               DrawerTile(
                 iconData: Icons.playlist_add_check,
@@ -60,9 +66,8 @@ class CustomDrawer extends StatelessWidget {
                     context
                         .bloc<DrawerBloc>()
                         .add(const DrawerEvent.exitPressed());
-                        return SignInPage();
-                  }
-              ),
+                    return SignInPage();
+                  }),
             ],
           ),
         );

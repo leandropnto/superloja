@@ -43,6 +43,8 @@ class Header extends StatelessWidget {
                   unauthenticated: (_) => "Faça o login",
                 )}",
                 style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               )
             ],
           ),

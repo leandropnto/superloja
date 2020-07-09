@@ -11,5 +11,7 @@ abstract class ValueFailure with _$ValueFailure{
   const factory ValueFailure.shortInput(String name) = _ShortInput;
   const factory ValueFailure.largeInput(String name) = _LargeInput;
   const factory ValueFailure.fullName(String name) = _FullName;
+  const factory ValueFailure.invalidNumber(String number) = _InvalidNumber;
+  const factory ValueFailure.invalidPositivNumber(String number) = _InvalidPositivNumber;
 }
 
