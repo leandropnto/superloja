@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/application/product/product_list/product_bloc.dart';
 import 'package:superloja/injection.dart';
@@ -66,6 +67,8 @@ class CustomDrawer extends StatelessWidget {
                     context
                         .bloc<DrawerBloc>()
                         .add(const DrawerEvent.exitPressed());
+
+                    context.bloc<CartBloc>().add(const CartEvent.clear());
                     return SignInPage();
                   }),
             ],

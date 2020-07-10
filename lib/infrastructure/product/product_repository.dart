@@ -23,4 +23,17 @@ class ProductRepository implements IProductRepository {
           ),
         );
   }
+
+  @override
+  Future<Either<ProductFailure, Product>> getProduct(String id) async{
+    try{
+       final snapshot = await _firestore.collection("products").document(id).get();
+       final productDto = ProductDto.fromFirestore(snapshot);
+       final product = productDto.toDomain();
+       return right(product);
+    }catch (e){
+      return left(const ProductFailure.serverError());
+    }
+
+  }
 }

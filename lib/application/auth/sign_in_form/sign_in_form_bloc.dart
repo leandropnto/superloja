@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
+import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/domain/auth/auth_failures.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/auth/user.dart';
@@ -57,6 +58,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
         result.fold((f) {}, (u) {
           getIt<AuthBloc>().add(AuthEvent.refresh(user: u));
+          getIt<CartBloc>().add(const CartEvent.loading());
         });
         yield state.copyWith(
             isSubmitting: false, authFailureOrSuccessOption: some(result));

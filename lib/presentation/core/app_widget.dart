@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
+import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/core/constants.dart';
@@ -15,6 +16,7 @@ class AppWidget extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested())),
+        BlocProvider(create: (context) => getIt<CartBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

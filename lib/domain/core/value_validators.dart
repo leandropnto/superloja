@@ -68,7 +68,7 @@ Either<ValueFailure, num> validatePrice(String input) {
       return left(ValueFailure.invalidNumber(input));
     }
     return right(price);
-  } on FormatException catch (e) {
+  } on FormatException  {
     return left(ValueFailure.invalidNumber(input));
   }
 
@@ -82,7 +82,7 @@ Either<ValueFailure, int> validateStock(String input) {
     }
 
     return right(size);
-  } on FormatException catch (e) {
+  } on FormatException {
     return left(ValueFailure.invalidNumber(input));
   }
 

@@ -4,8 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/auth/user.dart';
+import 'package:superloja/injection.dart';
 
 part 'auth_event.dart';
 
@@ -35,6 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           () => const AuthState.unauthenticated(),
           (user) => AuthState.authenticated(user),
         );
+
+        getIt<CartBloc>().add(const CartEvent.loading());
       },
       signedOut: (e) async* {
         await _authFacade.signOut();
