@@ -12,10 +12,13 @@ import 'package:superloja/infrastructure/cart/firebase_cart_repository.dart';
 import 'package:superloja/domain/cart/i_cart_repository.dart';
 import 'package:superloja/infrastructure/product/product_repository.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
+import 'package:superloja/infrastructure/section/firebase_section_repository.dart';
+import 'package:superloja/domain/section/i_section_repository.dart';
 import 'package:superloja/infrastructure/user/firebase_user_facade.dart';
 import 'package:superloja/domain/user/i_user_facade.dart';
 import 'package:superloja/application/product/product_list/product_bloc.dart';
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
+import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/infrastructure/auth/firebase_auth_facade.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
@@ -34,6 +37,7 @@ void $initGetIt(GetIt g, {String environment}) {
       () => fireBaseInjectableModule.googleSignIn);
   g.registerFactory<ProductBloc>(() => ProductBloc(g<IProductRepository>()));
   g.registerFactory<ProductFormBloc>(() => ProductFormBloc());
+  g.registerFactory<SectionBloc>(() => SectionBloc(g<ISectionRepository>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserFacade>()));
@@ -42,6 +46,8 @@ void $initGetIt(GetIt g, {String environment}) {
   //Eager singletons must be registered in the right order
   g.registerSingleton<ICartRepository>(FirebaseCartRepository(g<Firestore>()));
   g.registerSingleton<IProductRepository>(ProductRepository(g<Firestore>()));
+  g.registerSingleton<ISectionRepository>(
+      FirebaseSectionRepository(g<Firestore>()));
   g.registerSingleton<IUserFacade>(FirebaseUserFacade(g<Firestore>()));
   g.registerSingleton<CartBloc>(
       CartBloc(g<ICartRepository>(), g<IProductRepository>()));

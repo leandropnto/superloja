@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
+import 'package:superloja/application/section/section_bloc.dart';
+import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/pages/home/home_page.dart';
 import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 import 'package:superloja/presentation/pages/splash/widgets/background.dart';
@@ -16,10 +18,16 @@ class SplashPage extends StatelessWidget {
           state.map(
             initial: (_) {},
             authenticated: (u) => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const HomePage())),
+              MaterialPageRoute(
+                builder: (context) => BlocProvider<SectionBloc>(
+                  create: (_) =>
+                      getIt<SectionBloc>()..add(const SectionEvent.watchAll()),
+                  child: const HomePage(),
+                ),
+              ),
+            ),
             unauthenticated: (_) => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => SignInPage())),
-
           )
         },
         builder: (context, state) => Background(
@@ -32,7 +40,9 @@ class SplashPage extends StatelessWidget {
                 fit: BoxFit.contain,
                 alignment: Alignment.center,
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Text("Bem Vindo à",
                   style: Theme.of(context).textTheme.headline3,
                   textAlign: TextAlign.center),

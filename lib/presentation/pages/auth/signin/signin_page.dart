@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
 import 'package:superloja/presentation/pages/home/home_page.dart';
@@ -43,10 +44,13 @@ class SignInPage extends StatelessWidget {
                     ).show(context);
                   },
                       (_) => {
-
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => const HomePage(),
+                                builder: (context) => BlocProvider<SectionBloc>(
+                                  create: (_) => getIt<SectionBloc>()
+                                    ..add(const SectionEvent.watchAll()),
+                                  child: const HomePage(),
+                                ),
                               ),
                             )
                           });
