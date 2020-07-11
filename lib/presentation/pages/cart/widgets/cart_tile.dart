@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/domain/cart/cart_product.dart';
+import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/pages/cart/widgets/cart_product_info.dart';
+import 'package:superloja/presentation/pages/product/product_form/product_form_page.dart';
 
 import 'quantity_product.dart';
 
@@ -11,24 +15,38 @@ class CartTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Row(
-          children: <Widget>[
-            SizedBox(
-              height: 80,
-              width: 80,
-              child: Image.network(
-                item.product.images.first,
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => BlocProvider<ProductFormBloc>(
+            create: (context) => getIt<ProductFormBloc>()
+              ..add(ProductFormEvent.loading(item.product)),
+            child: const ProductFormPage(),
+          ),
+        ),
+      ),
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                height: 80,
+                width: 80,
+                child: Image.network(
+                  item.product.images.first,
+                ),
               ),
-            ),
-            Expanded(
-              child: CartProductInfo(item: item,)
-            ),
-            QuantityProduct(item: item,),
-          ],
+              Expanded(
+                  child: CartProductInfo(
+                item: item,
+              )),
+              QuantityProduct(
+                item: item,
+              ),
+            ],
+          ),
         ),
       ),
     );

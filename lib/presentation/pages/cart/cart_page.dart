@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/pages/cart/widgets/cart_image.dart';
+import 'package:superloja/presentation/pages/cart/widgets/cart_total.dart';
 
 import 'widgets/cart_tile.dart';
 import 'widgets/empty_cart.dart';
@@ -23,6 +24,7 @@ class CartPage extends StatelessWidget {
             CartImage(),
             EmptyCart(),
             ...state.cartProducts.map((e) => CartTile(item: e,)),
+            CartTotal(),
           ],
         ),
       ),
