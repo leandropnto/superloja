@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -30,15 +32,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async* {
     yield* event.map(
       authCheckRequested: (e) async* {
-        await Future.delayed(const Duration(seconds: 2));
-        // await _authFacade.signOut();
         final userOption = await _authFacade.getSignedInUser();
         yield userOption.fold(
           () => const AuthState.unauthenticated(),
-          (user) => AuthState.authenticated(user),
+          (user) {
+            getIt<CartBloc>().add(const CartEvent.loading());
+            return AuthState.authenticated(user);
+          },
         );
-
-        getIt<CartBloc>().add(const CartEvent.loading());
       },
       signedOut: (e) async* {
         await _authFacade.signOut();

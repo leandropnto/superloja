@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:superloja/domain/core/value_objects.dart';
+import 'package:superloja/domain/product/i_product_repository.dart';
 import 'package:superloja/domain/product/product.dart';
 import 'package:superloja/domain/product/product_size.dart';
 import 'package:superloja/domain/product/value_objects.dart';
@@ -17,7 +18,9 @@ part 'product_form_bloc.freezed.dart';
 
 @injectable
 class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
-  ProductFormBloc();
+  final IProductRepository _productRepository;
+
+  ProductFormBloc(this._productRepository) : assert(_productRepository != null);
 
   @override
   ProductFormState get initialState => ProductFormState.initial();
@@ -32,6 +35,11 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
       },
       selectSize: (e) async* {
         yield state.copyWith(size: e.size);
+      },
+      loadingById: (e) async* {
+        final product = await _productRepository.getProduct(e.product);
+        yield product.fold(
+            (l) => state, (r) => state.copyWith(size: r.minPrice, product: r));
       },
     );
   }

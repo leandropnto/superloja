@@ -16,15 +16,8 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => BlocProvider<ProductFormBloc>(
-            create: (context) => getIt<ProductFormBloc>()
-              ..add(ProductFormEvent.loading(item.product)),
-            child: const ProductFormPage(),
-          ),
-        ),
-      ),
+      onTap: () => Navigator.of(context)
+          .pushNamed("/productByProduct", arguments: item.product),
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Padding(

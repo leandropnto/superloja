@@ -17,17 +17,10 @@ class SplashPage extends StatelessWidget {
         listener: (context, state) => {
           state.map(
             initial: (_) {},
-            authenticated: (u) => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => BlocProvider<SectionBloc>(
-                  create: (_) =>
-                      getIt<SectionBloc>()..add(const SectionEvent.watchAll()),
-                  child: const HomePage(),
-                ),
-              ),
-            ),
-            unauthenticated: (_) => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => SignInPage())),
+            authenticated: (u) =>
+                Navigator.of(context).pushReplacementNamed("/home"),
+            unauthenticated: (_) =>
+                Navigator.of(context).pushReplacementNamed("/signIn"),
           )
         },
         builder: (context, state) => Background(
@@ -43,7 +36,7 @@ class SplashPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Text("Bem Vindo à",
+              Text("Bem Vindo a",
                   style: Theme.of(context).textTheme.headline3,
                   textAlign: TextAlign.center),
               Text(

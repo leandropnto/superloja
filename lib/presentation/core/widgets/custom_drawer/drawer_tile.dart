@@ -6,16 +6,15 @@ class DrawerTile extends StatelessWidget {
   final IconData iconData;
   final String title;
   final int page;
-  final Widget Function() navigate;
-  final Widget Function() navigateReplace;
+  final VoidCallback onTap;
+
 
   const DrawerTile({
     Key key,
     this.iconData,
     this.title,
     this.page,
-    this.navigate,
-    this.navigateReplace,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -25,15 +24,7 @@ class DrawerTile extends StatelessWidget {
     return BlocBuilder<DrawerBloc, DrawerState>(
       builder: (BuildContext context, DrawerState state) {
         return InkWell(
-          onTap: () {
-            if (navigate != null) {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => navigate()));
-            } else if (navigateReplace != null) {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => navigateReplace()));
-            }
-          },
+          onTap: onTap,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
             height: 60,

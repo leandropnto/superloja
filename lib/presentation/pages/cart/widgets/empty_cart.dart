@@ -41,15 +41,8 @@ class EmptyCart extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => BlocProvider<ProductBloc>(
-                            create: (_) => getIt<ProductBloc>()
-                              ..add(const ProductEvent.watchAll()),
-                            child: ProductListPage(),
-                          ),
-                        ));
-                      },
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed("/products"),
                       icon: Icon(FontAwesome.cart_plus),
                       label: const Text('PRODUTOS'),
                       textColor: Colors.white,

@@ -31,16 +31,15 @@ class SignUpPage extends StatelessWidget {
                     message: f.map(
                       cancelledByUser: (_) => "Cancelado...",
                       serverError: (_) => "Ops... Ocorreu um erro",
-                      emailAlreadyInUse: (_) => "Já existe uma conta com este email",
+                      emailAlreadyInUse: (_) =>
+                          "Já existe uma conta com este email",
                       invalidEmailAndPasswordCombination: (_) =>
                           "email ou senha inválidos",
                       userDisabled: (value) => "Usuario desabilitado",
                       userNotFound: (value) => "Usuário nao encontrado",
                     ),
                   ).show(context),
-                  (r) => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  ),
+                  (r) => Navigator.of(context).pushNamed("/home"),
                 ),
               );
             },

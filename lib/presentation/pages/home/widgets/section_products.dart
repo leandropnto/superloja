@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:superloja/domain/section/section.dart';
+import 'package:superloja/presentation/pages/home/widgets/section_staggered.dart';
+
+import 'section_list.dart';
 
 class SectionProducts extends StatelessWidget {
   final List<Section> sections;
@@ -8,8 +11,20 @@ class SectionProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    sections.forEach((element) => print(element.name));
-    return Container();
+    final children = sections.map<Widget>((section) {
+      switch (section.type) {
+        case 'List':
+          return SectionList(
+            section: section,
+          );
+        case 'Staggered':
+          return SectionStaggered(section: section,);
+        default:
+          return Container();
+      }
+    }).toList();
+    return SliverList(
+      delegate: SliverChildListDelegate(children),
+    );
   }
 }

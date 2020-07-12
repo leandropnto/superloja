@@ -36,7 +36,8 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<GoogleSignIn>(
       () => fireBaseInjectableModule.googleSignIn);
   g.registerFactory<ProductBloc>(() => ProductBloc(g<IProductRepository>()));
-  g.registerFactory<ProductFormBloc>(() => ProductFormBloc());
+  g.registerFactory<ProductFormBloc>(
+      () => ProductFormBloc(g<IProductRepository>()));
   g.registerFactory<SectionBloc>(() => SectionBloc(g<ISectionRepository>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(

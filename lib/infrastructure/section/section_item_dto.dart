@@ -10,6 +10,7 @@ part 'section_item_dto.g.dart';
 abstract class SectionItemDto implements _$SectionItemDto {
   const factory SectionItemDto({
     @required final String image,
+    final String product,
   }) = _SectionItemDto;
 
   factory SectionItemDto.fromJson(Map<String, dynamic> json) =>
@@ -20,7 +21,7 @@ abstract class SectionItemDto implements _$SectionItemDto {
   }
 
   SectionItem toDomain() {
-    return SectionItem(image: image);
+    return SectionItem(image: image, product: product ?? "");
   }
 
   const SectionItemDto._();

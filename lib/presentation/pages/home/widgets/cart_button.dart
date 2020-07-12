@@ -14,11 +14,7 @@ class CartButton extends StatelessWidget {
           IconButton(
             icon: Icon(FontAwesome.shopping_cart),
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => CartPage(),
-                ),
-              );
+              Navigator.of(context).pushNamed("/cart");
             },
           ),
           Positioned(

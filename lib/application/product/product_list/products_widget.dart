@@ -14,19 +14,15 @@ class ProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         itemCount: products.length,
         itemBuilder: (_, index) {
           final product = products[index];
           return GestureDetector(
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) =>
-                BlocProvider<ProductFormBloc>(
-                  create: (context) => getIt<ProductFormBloc>()
-                  ..add(ProductFormEvent.loading(product)),
-                  child: const ProductFormPage(),
-                ),
-            )),
+            onTap: () => Navigator.of(context).pushNamed(
+              "/productByProduct",
+              arguments: product,
+            ),
             child: Card(
               child: Container(
                 height: 100,
@@ -67,7 +63,9 @@ class ProductsWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            product.minPrice.price.value.fold((l) => "Preço inválido", (r) => "R\$ ${r.toStringAsFixed(2)}"),
+                            product.minPrice.price.value.fold(
+                                (l) => "Preço inválido",
+                                (r) => "R\$ ${r.toStringAsFixed(2)}"),
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w800,

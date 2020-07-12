@@ -17,8 +17,7 @@ class CustomDrawer extends StatelessWidget {
     return BlocConsumer<DrawerBloc, DrawerState>(
       listener: (BuildContext context, DrawerState state) {
         if (state.page == 9) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => SignInPage()));
+          Navigator.of(context).pushReplacementNamed("/signIn");
         }
       },
       builder: (BuildContext context, DrawerState state) {
@@ -31,17 +30,13 @@ class CustomDrawer extends StatelessWidget {
                 iconData: Icons.home,
                 title: "Início",
                 page: 0,
-                navigate: () => const HomePage(),
+                onTap: () => Navigator.of(context).pushNamed("/home"),
               ),
               DrawerTile(
                 iconData: Icons.list,
                 page: 1,
                 title: "Produtos",
-                navigateReplace: () => BlocProvider<ProductBloc>(
-                  create: (_) =>
-                      getIt<ProductBloc>()..add(const ProductEvent.watchAll()),
-                  child: ProductListPage(),
-                ),
+                onTap: () => Navigator.of(context).pushNamed("/products"),
               ),
               DrawerTile(
                 iconData: Icons.playlist_add_check,
@@ -57,19 +52,19 @@ class CustomDrawer extends StatelessWidget {
                 iconData: Icons.location_on,
                 page: 4,
                 title: "Cadastrar Usuário",
-                navigate: () => SignUpPage(),
+                onTap: () => Navigator.of(context).pushNamed("/signUp"),
               ),
               DrawerTile(
                   iconData: Icons.exit_to_app,
                   page: 9,
                   title: "Sair",
-                  navigateReplace: () {
+                  onTap: () {
                     context
                         .bloc<DrawerBloc>()
                         .add(const DrawerEvent.exitPressed());
 
                     context.bloc<CartBloc>().add(const CartEvent.clear());
-                    return SignInPage();
+                    Navigator.of(context).pushNamed("/signIn");
                   }),
             ],
           ),
