@@ -18,11 +18,14 @@ class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final IUserFacade _userFacade;
+  final Firestore _firestore;
 
-  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn, this._userFacade)
+  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn, this._userFacade,
+      this._firestore)
       : assert(_firebaseAuth != null),
         assert(_googleSignIn != null),
-        assert(_userFacade != null);
+        assert(_userFacade != null),
+        assert(_firestore != null);
 
   @override
   Future<Option<User>> getSignedInUser() async {
@@ -65,11 +68,14 @@ class FirebaseAuthFacade implements IAuthFacade {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: pswd);
       final firebaseUser = await _firebaseAuth.currentUser();
-      final document = await Firestore.instance.collection("users").document(firebaseUser.uid).get();
-      return right(UserDto.fromFirestore(document).toDomain());
+      final document = await _firestore.collection("users").document(
+          firebaseUser.uid).get();
+      final admin = await _firestore.collection("admins").document(firebaseUser.uid).get();
+      final user = UserDto.fromFirestore(document).copyWith(isAdmin: admin.exists).toDomain();
+      return right(user);
     } on PlatformException catch (e) {
       return (e.code == 'ERROR_USER_NOT_FOUND' ||
-              e.code == 'ERROR_WRONG_PASSWORD')
+          e.code == 'ERROR_WRONG_PASSWORD')
           ? left(const AuthFailures.invalidEmailAndPasswordCombination())
           : left(const AuthFailures.serverError());
     }

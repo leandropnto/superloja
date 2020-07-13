@@ -10,5 +10,6 @@ abstract class User with _$User {
     @required UniqueId id,
     @required Name name,
     @required EmailAddress email,
+    @required bool isAdmin,
   }) = _User;
 }

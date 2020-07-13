@@ -28,12 +28,16 @@ class FirebaseUserFacade implements IUserFacade {
   @override
   Future<Either<UserFailures, User>> getUser(UniqueId uniqueId) async {
     final uid = uniqueId.getOrCrash();
-    final documentSnapshot =
+    final documentUser =
         await _firestore.collection("users").document(uid).get();
 
+    final documentAdmin =
+    await _firestore.collection("admins").document(uid).get();
+
+
     try {
-      final userDto = UserDto.fromFirestore(documentSnapshot)
-          .copyWith(id: documentSnapshot.documentID);
+      final userDto = UserDto.fromFirestore(documentUser)
+          .copyWith(id: documentUser.documentID, isAdmin: documentAdmin.exists);
       return right(userDto.toDomain());
     } catch (e) {
       return left(const UserFailures.createUserError());

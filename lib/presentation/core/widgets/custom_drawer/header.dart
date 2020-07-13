@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
@@ -25,7 +26,7 @@ class Header extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32),
+                padding: const EdgeInsets.only(top: 32, bottom: 8),
                 child: Text(
                   "SUPER LOJA",
                   style: TextStyle(
@@ -34,7 +35,8 @@ class Header extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              const SizedBox(height: 30),
+              IconButton(icon: Icon(FontAwesome.user_circle_o, color: Colors.white, size: 45,), color: Colors.white,),
+              const SizedBox(height: 10),
               Text(
                 "Ola, ${state.map(
                   initial: (_) => "Faça o Login",

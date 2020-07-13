@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
+import 'package:superloja/presentation/core/constants.dart';
+import 'package:superloja/presentation/core/constants.dart';
 
 class DrawerTile extends StatelessWidget {
   final IconData iconData;
@@ -33,7 +35,7 @@ class DrawerTile extends StatelessWidget {
                 Icon(
                   iconData,
                   size: 32,
-                  color: state.page == page ? primaryColor : Colors.grey[700],
+                  color: kPrimaryColor,
                 ),
                 const SizedBox(
                   width: 24,
@@ -42,7 +44,8 @@ class DrawerTile extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16,
-                    color: state.page == page ? primaryColor : Colors.grey[700],
+                    fontWeight: FontWeight.w600,
+                    color: kPrimaryColor,
                   ),
                 )
               ],

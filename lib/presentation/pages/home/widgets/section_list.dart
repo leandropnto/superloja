@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_header.dart';
-import 'package:superloja/presentation/pages/home/widgets/section_list_item_tile.dart';
+import 'package:superloja/presentation/pages/home/widgets/section_item_tile.dart';
 
 class SectionList extends StatelessWidget {
   final Section section;
@@ -23,7 +23,7 @@ class SectionList extends StatelessWidget {
           SizedBox(height: 150,
             child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) => SectionListItemTile(sectionItem: reversed[index],),
+                itemBuilder: (_, index) => SectionItemTile(sectionItem: reversed[index],),
                 separatorBuilder: (_, __) => const SizedBox(width: 4,),
                 itemCount:  section.items.length
             ), ),

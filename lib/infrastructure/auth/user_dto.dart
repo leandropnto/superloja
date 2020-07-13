@@ -15,6 +15,7 @@ abstract class UserDto implements _$UserDto {
     @JsonKey(ignore: true) String id,
     @required String name,
     @required String email,
+    bool isAdmin,
     @required @ServerTimestampConverter() FieldValue serverTimeStamp,
   }) = _UserDto;
 
@@ -23,14 +24,16 @@ abstract class UserDto implements _$UserDto {
         id: user.id.getOrCrash(),
         name: user.name.getOrCrash(),
         email: user.email.getOrCrash(),
+        isAdmin: user.isAdmin,
         serverTimeStamp: FieldValue.serverTimestamp());
   }
 
-  User toDomain(){
+  User toDomain() {
     return User(
       id: UniqueId.fromUniqueString(id),
       name: Name.from(name),
       email: EmailAddress(email),
+      isAdmin: isAdmin,
     );
   }
 

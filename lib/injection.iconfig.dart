@@ -56,6 +56,7 @@ void $initGetIt(GetIt g, {String environment}) {
     g<FirebaseAuth>(),
     g<GoogleSignIn>(),
     g<IUserFacade>(),
+    g<Firestore>(),
   ));
   g.registerSingleton<AuthBloc>(AuthBloc(g<IAuthFacade>()));
 }
