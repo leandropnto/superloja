@@ -26,10 +26,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   StreamSubscription<Either<CartFailures, List<CartItem>>> _cartSubscription;
 
   CartBloc(this._cartRepository, this._productRepository)
-      : assert(_cartRepository != null);
-
-  @override
-  CartState get initialState => CartState.initial();
+      : assert(_cartRepository != null), super(CartState.initial());
 
   @override
   Stream<CartState> mapEventToState(

@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -21,10 +19,7 @@ part 'auth_bloc.freezed.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
 
-  AuthBloc(this._authFacade) : assert(_authFacade != null);
-
-  @override
-  AuthState get initialState => const AuthState.initial();
+  AuthBloc(this._authFacade) : assert(_authFacade != null), super(const  AuthState.initial());
 
   @override
   Stream<AuthState> mapEventToState(

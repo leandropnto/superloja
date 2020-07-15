@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
-import 'package:superloja/application/section/section_bloc.dart';
-import 'package:superloja/injection.dart';
-import 'package:superloja/presentation/pages/home/home_page.dart';
-import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 import 'package:superloja/presentation/pages/splash/widgets/background.dart';
 
 class SplashPage extends StatelessWidget {

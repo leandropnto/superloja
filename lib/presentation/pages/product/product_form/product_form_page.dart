@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/presentation/pages/home/widgets/cart_button.dart';
 import 'package:superloja/presentation/pages/product/product_form/widgets/product_add_to_cart.dart';
+import 'package:superloja/presentation/pages/product/product_form/widgets/product_edit_button.dart';
 import 'package:superloja/presentation/pages/product/product_form/widgets/product_images.dart';
 import 'package:superloja/presentation/pages/product/product_form/widgets/product_name_text.dart';
 import 'package:superloja/presentation/pages/product/product_form/widgets/product_sizes.dart';
@@ -24,6 +25,7 @@ class ProductFormPage extends StatelessWidget {
         title: ProductTitleAppBar(),
         actions: <Widget>[
           CartButton(),
+          ProductEditButton(),
         ],
       ),
       body: BlocListener<CartBloc, CartState>(

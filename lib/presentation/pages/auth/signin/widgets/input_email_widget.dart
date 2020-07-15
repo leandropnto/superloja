@@ -11,7 +11,7 @@ class InputEmailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInFormBloc, SignInFormState>(
-      condition: (oldState, currentState) {
+      buildWhen: (oldState, currentState) {
         return oldState.emailAddress != currentState.emailAddress;
       },
       builder: (BuildContext context, SignInFormState state) {

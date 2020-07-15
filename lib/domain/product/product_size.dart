@@ -28,6 +28,13 @@ abstract class ProductSize implements _$ProductSize {
   }
 
   bool get hasStock => stock.value.fold((l) => false, (r) => r > 0);
+  bool get isValid => sizeName.isValid() && stock.isValid() && price.isValid();
+
+  factory ProductSize.empty() => ProductSize(
+    sizeName: SizeName('?'),
+    stock: Stock("1"),
+    price: Price("1.0"),
+  );
 
   const ProductSize._();
 }

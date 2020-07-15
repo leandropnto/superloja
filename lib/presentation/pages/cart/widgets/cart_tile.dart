@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/domain/cart/cart_product.dart';
-import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/pages/cart/widgets/cart_product_info.dart';
-import 'package:superloja/presentation/pages/product/product_form/product_form_page.dart';
 
 import 'quantity_product.dart';
 

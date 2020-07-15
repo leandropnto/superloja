@@ -39,7 +39,7 @@ class ProductSizeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
-      condition: (old, current) => old.size != current.size,
+      buildWhen: (old, current) => old.size != current.size,
       builder: (context, state) => GestureDetector(
         onTap: () {
           if (size.hasStock) {

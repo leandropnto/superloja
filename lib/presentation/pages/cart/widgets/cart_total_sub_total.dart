@@ -19,7 +19,7 @@ class CartTotalSubTotal extends StatelessWidget {
               const Text("Subtotal:"),
               Text(
                 "R\$ ${state.total.toStringAsFixed(2)}",
-                style: TextStyle(fontWeight: FontWeight.w500),
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
             ],
           ),

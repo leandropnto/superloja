@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/domain/section/section.dart';
-import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_item_tile.dart';
-import 'package:superloja/presentation/pages/product/product_form/product_form_page.dart';
 
 import 'section_header.dart';
 
@@ -16,7 +12,6 @@ class SectionStaggered extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reversed = section.items.reversed.toList();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(

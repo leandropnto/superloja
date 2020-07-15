@@ -16,7 +16,7 @@ class FirebaseUserFacade implements IUserFacade {
   @override
   Future<Either<UserFailures, Unit>> createUser(User user) async {
     final uid = user.id.getOrCrash();
-    final userDocument =  _firestore.collection("users").document(uid);
+    final userDocument = _firestore.collection("users").document(uid);
     try {
       await userDocument.setData(UserDto.fromDomain(user).toJson());
       return right(unit);
@@ -32,8 +32,7 @@ class FirebaseUserFacade implements IUserFacade {
         await _firestore.collection("users").document(uid).get();
 
     final documentAdmin =
-    await _firestore.collection("admins").document(uid).get();
-
+        await _firestore.collection("admins").document(uid).get();
 
     try {
       final userDto = UserDto.fromFirestore(documentUser)
@@ -42,5 +41,16 @@ class FirebaseUserFacade implements IUserFacade {
     } catch (e) {
       return left(const UserFailures.createUserError());
     }
+  }
+
+  @override
+  Stream<Either<UserFailures, List<User>>> watchUsers() async* {
+    yield* _firestore.collection("users").snapshots().map(
+          (snapshot) => right(
+            snapshot.documents
+                .map((doc) => UserDto.fromFirestore(doc).copyWith(isAdmin: true).toDomain())
+                .toList(),
+          ),
+        );
   }
 }

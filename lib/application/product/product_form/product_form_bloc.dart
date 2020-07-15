@@ -20,10 +20,7 @@ part 'product_form_bloc.freezed.dart';
 class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   final IProductRepository _productRepository;
 
-  ProductFormBloc(this._productRepository) : assert(_productRepository != null);
-
-  @override
-  ProductFormState get initialState => ProductFormState.initial();
+  ProductFormBloc(this._productRepository) : assert(_productRepository != null), super(ProductFormState.initial());
 
   @override
   Stream<ProductFormState> mapEventToState(

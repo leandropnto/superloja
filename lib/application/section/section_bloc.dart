@@ -20,10 +20,7 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
   final ISectionRepository _sectionRepository;
   StreamSubscription<Either<SectionFailure, List<Section>>> _streamSubscription;
 
-  SectionBloc(this._sectionRepository);
-
-  @override
-  SectionState get initialState => const SectionState.initial();
+  SectionBloc(this._sectionRepository) : super(const SectionState.initial());
 
   @override
   Stream<SectionState> mapEventToState(

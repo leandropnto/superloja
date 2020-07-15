@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
-import 'package:superloja/presentation/pages/cart/cart_page.dart';
 
 class CartButton extends StatelessWidget {
   @override

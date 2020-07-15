@@ -35,7 +35,15 @@ class Header extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              IconButton(icon: Icon(FontAwesome.user_circle_o, color: Colors.white, size: 45,), color: Colors.white,),
+              IconButton(
+                icon: Icon(
+                  FontAwesome.user_circle_o,
+                  color: Colors.white,
+                  size: 45,
+                ),
+                color: Colors.white,
+                onPressed: () {},
+              ),
               const SizedBox(height: 10),
               Text(
                 "Ola, ${state.map(

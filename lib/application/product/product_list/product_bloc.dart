@@ -22,10 +22,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   List<Product> _products = [];
 
-  ProductBloc(this._productRepository) : assert(_productRepository != null);
-
-  @override
-  ProductState get initialState => const ProductState.initial();
+  ProductBloc(this._productRepository) : assert(_productRepository != null), super(const ProductState.initial());
 
   @override
   Stream<ProductState> mapEventToState(

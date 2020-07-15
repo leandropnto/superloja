@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
-import 'package:superloja/application/product/product_list/product_bloc.dart';
-import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/core/constants.dart';
-import 'package:superloja/presentation/pages/product/product_list/product_list_page.dart';
 
 class EmptyCart extends StatelessWidget {
   @override

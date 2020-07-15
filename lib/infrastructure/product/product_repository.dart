@@ -17,23 +17,35 @@ class ProductRepository implements IProductRepository {
     yield* _firestore.collection("products").snapshots().map(
           (snapshot) => right(
             snapshot.documents
-                .map(
-                  (doc) => ProductDto.fromFirestore(doc).toDomain())
+                .map((doc) => ProductDto.fromFirestore(doc).toDomain())
                 .toList(),
           ),
         );
   }
 
   @override
-  Future<Either<ProductFailure, Product>> getProduct(String id) async{
-    try{
-       final snapshot = await _firestore.collection("products").document(id).get();
-       final productDto = ProductDto.fromFirestore(snapshot);
-       final product = productDto.toDomain();
-       return right(product);
-    }catch (e){
+  Future<Either<ProductFailure, Product>> getProduct(String id) async {
+    try {
+      final snapshot =
+          await _firestore.collection("products").document(id).get();
+      final productDto = ProductDto.fromFirestore(snapshot);
+      final product = productDto.toDomain();
+      return right(product);
+    } catch (e) {
       return left(const ProductFailure.serverError());
     }
+  }
 
+  @override
+  Future<Either<ProductFailure, Product>> save(Product product) async {
+    try {
+      await _firestore
+          .collection("products")
+          .document(product.id.getOrCrash())
+          .setData(ProductDto.fromDomain(product).toJson());
+      return right(product);
+    } catch (e) {
+      return left(const ProductFailure.serverError());
+    }
   }
 }

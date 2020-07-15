@@ -19,7 +19,7 @@ abstract class Product implements _$Product {
 
   factory Product.empty() {
     return Product(
-        id: UniqueId.fromUniqueString(''),
+        id: UniqueId(),
         name: ProductName(''),
         description: ProductDescription(''),
         images: [],
@@ -27,7 +27,7 @@ abstract class Product implements _$Product {
   }
 
   ProductSize get minPrice {
-    final orderedSizes = sizes
+    final orderedSizes = sizes.where((element) => element.hasStock).toList()
       ..sort((a, b) => a.price.value.fold((l) => 0, (r) => r.toInt()) -
           a.price.value.fold((l) => 0, (r) => r.toInt()) as int);
     return orderedSizes.isNotEmpty
@@ -38,6 +38,8 @@ abstract class Product implements _$Product {
             stock: Stock("-1"),
           );
   }
+
+  bool get hasSizes => sizes.isNotEmpty;
 
   const Product._();
 }

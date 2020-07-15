@@ -9,5 +9,6 @@ extension FirebaseUserMapperX on FirebaseUser {
         id: UniqueId.fromUniqueString(uid),
         name: Name.from(displayName ?? ''),
         email: EmailAddress(email),
+        isAdmin: false,
       );
 }

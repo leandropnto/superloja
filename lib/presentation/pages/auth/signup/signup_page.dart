@@ -7,7 +7,6 @@ import 'package:superloja/presentation/pages/auth/signup/widgets/background.dart
 import 'package:superloja/presentation/pages/auth/signup/widgets/create_button.dart';
 import 'package:superloja/presentation/pages/auth/signup/widgets/inputs_widget.dart';
 import 'package:superloja/presentation/pages/auth/signup/widgets/logo_widget.dart';
-import 'package:superloja/presentation/pages/home/home_page.dart';
 
 class SignUpPage extends StatelessWidget {
   @override

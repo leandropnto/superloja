@@ -8,7 +8,7 @@ class NameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpFormBloc, SignUpFormState>(
-      condition: (old, current) => old.fullName != current.fullName,
+      buildWhen: (old, current) => old.fullName != current.fullName,
       builder: (context, state) => Container(
         margin: const EdgeInsets.only(bottom: 20),
         child: RoundedInputField(
@@ -29,7 +29,7 @@ class EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpFormBloc, SignUpFormState>(
-      condition: (old, current) => old.emailAddress != current.emailAddress,
+      buildWhen: (old, current) => old.emailAddress != current.emailAddress,
       builder: (context, state) => Container(
         margin: const EdgeInsets.only(bottom: 20),
         child: RoundedInputField(
@@ -52,7 +52,7 @@ class PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpFormBloc, SignUpFormState>(
-      condition: (old, current) => old.password != current.password,
+      buildWhen: (old, current) => old.password != current.password,
       builder: (context, state) => Container(
         margin: const EdgeInsets.only(bottom: 20),
         child: RoundedInputField(
@@ -73,7 +73,7 @@ class ConfirmationInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpFormBloc, SignUpFormState>(
-      condition: (old, current) =>
+      buildWhen: (old, current) =>
           old.confirmPassword != current.confirmPassword,
       builder: (context, state) => Container(
         margin: const EdgeInsets.only(bottom: 20),

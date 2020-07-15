@@ -30,6 +30,7 @@ class ProductTextDescription extends StatelessWidget {
               ),
             ],
           ),
+          textAlign: TextAlign.justify,
         ),
       ),
     );

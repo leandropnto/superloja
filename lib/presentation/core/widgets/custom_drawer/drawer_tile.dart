@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
-import 'package:superloja/presentation/core/constants.dart';
 
 class DrawerTile extends StatelessWidget {
   final IconData iconData;
@@ -21,7 +20,6 @@ class DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
 
     return BlocBuilder<DrawerBloc, DrawerState>(
       builder: (BuildContext context, DrawerState state) {

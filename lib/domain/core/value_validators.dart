@@ -46,7 +46,7 @@ Either<ValueFailure, String> validateMinLenght(String input, int minLenght) {
 Either<ValueFailure, String> validateMaxLenght(String input, int maxLenght) {
   return input.length <= maxLenght
       ? right(input)
-      : left(ValueFailure.shortInput(input));
+      : left(ValueFailure.largeInput(input));
 }
 
 Either<ValueFailure, String> validateFullName(String input) {

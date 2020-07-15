@@ -17,8 +17,10 @@ import 'package:superloja/domain/section/i_section_repository.dart';
 import 'package:superloja/infrastructure/user/firebase_user_facade.dart';
 import 'package:superloja/domain/user/i_user_facade.dart';
 import 'package:superloja/application/product/product_list/product_bloc.dart';
+import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
+import 'package:superloja/application/users/users_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/infrastructure/auth/firebase_auth_facade.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
@@ -36,9 +38,12 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<GoogleSignIn>(
       () => fireBaseInjectableModule.googleSignIn);
   g.registerFactory<ProductBloc>(() => ProductBloc(g<IProductRepository>()));
+  g.registerFactory<ProductEditBloc>(
+      () => ProductEditBloc(g<IProductRepository>()));
   g.registerFactory<ProductFormBloc>(
       () => ProductFormBloc(g<IProductRepository>()));
   g.registerFactory<SectionBloc>(() => SectionBloc(g<ISectionRepository>()));
+  g.registerFactory<UsersBloc>(() => UsersBloc(g<IUserFacade>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserFacade>()));

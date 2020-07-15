@@ -17,10 +17,7 @@ class DrawerBloc extends Bloc<DrawerEvent, DrawerState> {
 
   final IAuthFacade _authFacade;
 
-  DrawerBloc(this._authFacade) : assert(_authFacade != null);
-
-  @override
-  DrawerState get initialState => DrawerState.initial(page: 0);
+  DrawerBloc(this._authFacade) : assert(_authFacade != null), super(DrawerState.initial(page: 0));
 
   @override
   Stream<DrawerState> mapEventToState(

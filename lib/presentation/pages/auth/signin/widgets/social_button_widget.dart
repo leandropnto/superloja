@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInFormBloc, SignInFormState>(
-      condition: (old, current) =>
+      buildWhen: (old, current) =>
           old.isInputsValid != current.isInputsValid ||
           old.isSubmitting != current.isSubmitting,
       builder: (context, state) {

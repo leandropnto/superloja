@@ -5,15 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
-import 'package:superloja/application/product/product_list/product_bloc.dart';
-import 'package:superloja/injection.dart';
-import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/drawer_tile.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/header.dart';
-import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
-import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
-import 'package:superloja/presentation/pages/home/home_page.dart';
-import 'package:superloja/presentation/pages/product/product_list/product_list_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -78,7 +71,7 @@ class CustomDrawer extends StatelessWidget {
                                       page: 4,
                                       title: "Usuários",
                                       onTap: () => Navigator.of(context)
-                                          .pushNamed("/home"),
+                                          .pushNamed("/users"),
                                     ),
                                     DrawerTile(
                                       iconData: FontAwesome.shopping_bag,

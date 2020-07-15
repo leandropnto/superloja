@@ -12,7 +12,7 @@ class InputPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInFormBloc, SignInFormState>(
-        condition: (old, current) => old.password != current.password,
+        buildWhen: (old, current) => old.password != current.password,
         builder: (context, state) {
           return Container(
             alignment: Alignment.bottomLeft,

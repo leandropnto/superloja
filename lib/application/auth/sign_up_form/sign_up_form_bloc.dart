@@ -28,10 +28,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
     this._authFacade,
     this._userFacade,
   )   : assert(_authFacade != null),
-        assert(_userFacade != null);
-
-  @override
-  SignUpFormState get initialState => SignUpFormState.initial();
+        assert(_userFacade != null), super(SignUpFormState.initial());
 
   @override
   Stream<SignUpFormState> mapEventToState(
