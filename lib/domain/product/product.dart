@@ -13,15 +13,15 @@ abstract class Product implements _$Product {
     @required UniqueId id,
     @required ProductName name,
     @required ProductDescription description,
-    @required List<String> images,
+    @required List<dynamic> images,
     @required List<ProductSize> sizes,
   }) = _Product;
 
   factory Product.empty() {
     return Product(
         id: UniqueId(),
-        name: ProductName(''),
-        description: ProductDescription(''),
+        name: ProductName('Novo Produto'),
+        description: ProductDescription('Informe a descrição'),
         images: [],
         sizes: []);
   }

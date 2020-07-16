@@ -49,23 +49,45 @@ class ProductEditPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: ListView(
-        children: <Widget>[
-          const ImagesForm(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const ProductNameText(),
-                const ProductEditTextPrice(),
-                ProductEditDescription(),
-                SizesForm(),
-                const ProductSaveButton(),
-              ],
-            ),
+      body: Form(
+        key: formKey,
+        child: BlocConsumer<ProductEditBloc, ProductEditState>(
+          listener: (context, state) {},
+          builder: (context, state) => ListView(
+            children: <Widget>[
+              ImagesForm(
+                key: ObjectKey(state.photos),
+                images: state.photos,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    ProductNameText(state.productName),
+                    const ProductEditTextPrice(),
+                    ProductEditDescription(state.description),
+                    SizesForm(sizes: state.sizes),
+                    ProductSaveButton(onPressed: () {
+                      if (formKey.currentState.validate()) {
+                        formKey.currentState.save();
+                        if (!state.isSubmitting) {
+                          context
+                              .bloc<ProductEditBloc>()
+                              .add(const ProductEditEvent.save());
+                        }
+                      } else {
+                        FlushbarHelper.createError(
+                                message: "Verifique os dados do produto")
+                            .show(context);
+                      }
+                    }),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

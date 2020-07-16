@@ -14,5 +14,7 @@ abstract class ProductEditEvent with _$ProductEditEvent{
   const factory ProductEditEvent.onChangeSizeTitle(ProductSize size, String title) = _OnChangeSizeTitle;
   const factory ProductEditEvent.onChangeSizeStock(ProductSize size, String stock) = _OnChangeSizeStock;
   const factory ProductEditEvent.onChangeSizePrice(ProductSize size, String price) = _OnChangeSizePrice;
+  const factory ProductEditEvent.onSaveImages(List<dynamic> images) = _onSaveImages;
+  const factory ProductEditEvent.onSaveSizes(List<ProductSize> sizes) = _onSaveSizes;
 
 }

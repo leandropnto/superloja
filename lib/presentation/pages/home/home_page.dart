@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
             ),
             actions: <Widget>[
               CartButton(),
+              HomeEditButton(),
             ],
           ),
           BlocBuilder<SectionBloc, SectionState>(

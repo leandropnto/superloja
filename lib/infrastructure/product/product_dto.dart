@@ -26,7 +26,7 @@ abstract class ProductDto implements _$ProductDto {
       id: product.id.getOrCrash(),
       name: product.name.getOrCrash(),
       description: product.description.getOrCrash(),
-      images: product.images,
+      images: product.images.map((e) => e as String).toList(),
       sizes: product.sizes.map((e) => e.toMap()).toList(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );

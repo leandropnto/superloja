@@ -23,7 +23,7 @@ class ProductImages extends StatelessWidget {
               dotIncreaseSize: 2,
               defaultImage: SvgPicture.asset("assets/svg/cart.svg"),
               images:
-                  state.product.images.map((i) => Image.network(i)).toList(),
+                  state.product.images.map((i) => Image.network(i as String)).toList(),
             ),
           );
         });

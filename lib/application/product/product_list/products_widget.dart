@@ -28,7 +28,7 @@ class ProductsWidget extends StatelessWidget {
                     AspectRatio(
                       aspectRatio: 1,
                       child: Image.network(
-                        product.images.first,
+                        product.images.first as String,
                         fit: BoxFit.cover,
                       ),
                     ),

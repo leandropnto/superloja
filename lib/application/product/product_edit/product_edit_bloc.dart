@@ -64,7 +64,7 @@ class ProductEditBloc extends Bloc<ProductEditEvent, ProductEditState> {
             description: state.description,
             name: state.productName,
             sizes: state.sizes,
-            images: state.photos.whereType<String>().toList(),
+            images: state.photos,
           ));
 
           yield state.copyWith(
@@ -114,31 +114,50 @@ class ProductEditBloc extends Bloc<ProductEditEvent, ProductEditState> {
         final size = state.sizes.firstWhere((element) => element == e.size,
             orElse: () => ProductSize.empty());
         final index = state.sizes.indexOf(size);
-        final changed = size.copyWith(sizeName: SizeName(e.title));
-        yield state.copyWith(
-            sizes: [...state.sizes]
-              ..removeAt(index)
-              ..insert(index, changed));
+        if (index >= 0) {
+          final changed = size.copyWith(sizeName: SizeName(e.title));
+          yield state.copyWith(
+              sizes: [...state.sizes]
+                ..removeAt(index)
+                ..insert(index, changed));
+        }
+
       },
       onChangeSizeStock: (e) async* {
-        final size = state.sizes.firstWhere((element) => element == e.size,
-            orElse: () => ProductSize.empty());
-        final index = state.sizes.indexOf(size);
-        final changed = size.copyWith(stock: Stock(e.stock));
-        yield state.copyWith(
-            sizes: [...state.sizes]
-              ..removeAt(index)
-              ..insert(index, changed));
+        if (state.sizes.isEmpty || state.sizes.length == 1) {
+          yield state.copyWith(sizes: [e.size]);
+        } else {
+          final size = state.sizes.firstWhere((element) => element == e.size,
+              orElse: () => ProductSize.empty());
+
+          final index = state.sizes.indexOf(size);
+          if (index >=0) {
+            final changed = size.copyWith(stock: Stock(e.stock));
+            yield state.copyWith(
+                sizes: [...state.sizes]
+                  ..removeAt(index)
+                  ..insert(index, changed));
+          }
+
+        }
       },
       onChangeSizePrice: (e) async* {
         final size = state.sizes.firstWhere((element) => element == e.size,
             orElse: () => ProductSize.empty());
         final index = state.sizes.indexOf(size);
-        final changed = size.copyWith(price: Price(e.price));
-        yield state.copyWith(
-            sizes: [...state.sizes]
-              ..removeAt(index)
-              ..insert(index, changed));
+        if (index >= 0) {
+          final changed = size.copyWith(price: Price(e.price));
+          yield state.copyWith(
+              sizes: [...state.sizes]
+                ..removeAt(index)
+                ..insert(index, changed));
+        }
+      },
+      onSaveImages: (e) async* {
+        yield state.copyWith(photos: e.images);
+      },
+      onSaveSizes: (e) async* {
+        yield state.copyWith(sizes: e.sizes);
       },
     );
   }

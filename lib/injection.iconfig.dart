@@ -6,6 +6,7 @@
 
 import 'package:superloja/infrastructure/core/firebase_injectable_module.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:superloja/infrastructure/cart/firebase_cart_repository.dart';
@@ -34,6 +35,8 @@ void $initGetIt(GetIt g, {String environment}) {
   final fireBaseInjectableModule = _$FireBaseInjectableModule();
   g.registerLazySingleton<FirebaseAuth>(
       () => fireBaseInjectableModule.firebaseAuth);
+  g.registerLazySingleton<FirebaseStorage>(
+      () => fireBaseInjectableModule.firebaseStorage);
   g.registerLazySingleton<Firestore>(() => fireBaseInjectableModule.firestore);
   g.registerLazySingleton<GoogleSignIn>(
       () => fireBaseInjectableModule.googleSignIn);
@@ -51,7 +54,8 @@ void $initGetIt(GetIt g, {String environment}) {
 
   //Eager singletons must be registered in the right order
   g.registerSingleton<ICartRepository>(FirebaseCartRepository(g<Firestore>()));
-  g.registerSingleton<IProductRepository>(ProductRepository(g<Firestore>()));
+  g.registerSingleton<IProductRepository>(
+      ProductRepository(g<Firestore>(), g<FirebaseStorage>()));
   g.registerSingleton<ISectionRepository>(
       FirebaseSectionRepository(g<Firestore>()));
   g.registerSingleton<IUserFacade>(FirebaseUserFacade(g<Firestore>()));

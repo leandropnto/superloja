@@ -6,7 +6,9 @@ import 'package:superloja/presentation/core/constants.dart';
 
 class ProductSaveButton extends StatelessWidget {
 
-  const ProductSaveButton();
+  final VoidCallback onPressed;
+
+  const ProductSaveButton({this.onPressed});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductEditBloc, ProductEditState>(
@@ -20,11 +22,7 @@ class ProductSaveButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        onPressed: !state.isSubmitting
-            ? () =>
-            context.bloc<ProductEditBloc>().add(
-                const ProductEditEvent.save())
-            : null,
+        onPressed: onPressed,
         icon: Icon(FontAwesome.save),
         label: state.isSubmitting ? CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation(Colors.white),
