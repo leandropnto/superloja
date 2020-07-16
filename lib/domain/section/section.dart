@@ -7,12 +7,14 @@ part 'section.freezed.dart';
 @freezed
 abstract class Section with _$Section {
   const factory Section({
+    @required final String id,
     @required final String name,
     @required final String type,
     @required final List<SectionItem> items,
   }) = _Section;
 
   factory Section.empty() => const Section(
+        id: '',
         name: '',
         type: '',
         items: [],

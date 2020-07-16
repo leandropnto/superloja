@@ -13,7 +13,7 @@ class FirebaseSectionRepository implements ISectionRepository {
   FirebaseSectionRepository(this._firestore) : assert(_firestore != null);
 
   @override
-  Stream<Either<SectionFailure, List<Section>>> watchProducts() async* {
+  Stream<Either<SectionFailure, List<Section>>> watchSections() async* {
     yield* _firestore.collection("home").snapshots().map(
           (snapshot) => right(
             snapshot.documents

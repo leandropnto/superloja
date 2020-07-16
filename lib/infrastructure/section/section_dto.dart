@@ -26,6 +26,7 @@ abstract class SectionDto implements _$SectionDto {
 
   Section toDomain() {
     return Section(
+      id: id,
       name: name,
       type: type,
       items: items.map((e) => e.toDomain()).toList(),

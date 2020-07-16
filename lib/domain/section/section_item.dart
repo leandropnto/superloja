@@ -5,8 +5,8 @@ part 'section_item.freezed.dart';
 @freezed
 abstract class SectionItem with _$SectionItem {
   const factory SectionItem({
-    @required String image,
-    @required String product,
+    @required final dynamic image,
+    @required final String product,
   }) = _SectionItem;
 
   factory SectionItem.empty() => const SectionItem(image: '', product: '');

@@ -4,5 +4,5 @@ import 'package:superloja/domain/section/section.dart';
 import 'section_failure.dart';
 
 abstract class ISectionRepository {
-  Stream<Either<SectionFailure, List<Section>>> watchProducts ();
+  Stream<Either<SectionFailure, List<Section>>> watchSections ();
 }
