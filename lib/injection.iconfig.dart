@@ -45,7 +45,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => ProductEditBloc(g<IProductRepository>()));
   g.registerFactory<ProductFormBloc>(
       () => ProductFormBloc(g<IProductRepository>()));
-  g.registerFactory<SectionBloc>(() => SectionBloc(g<ISectionRepository>()));
+  g.registerFactory<SectionBloc>(
+      () => SectionBloc(g<ISectionRepository>(), g<IProductRepository>()));
   g.registerFactory<UsersBloc>(() => UsersBloc(g<IUserFacade>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(

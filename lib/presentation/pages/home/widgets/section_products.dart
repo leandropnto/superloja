@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:superloja/domain/section/section.dart';
-import 'package:superloja/presentation/pages/home/view_model/section_view.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_add_section.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_staggered.dart';
 

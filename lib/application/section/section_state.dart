@@ -8,6 +8,7 @@ abstract class SectionState with _$SectionState {
     @required final List<Section> sections,
     @required final List<Section> edittingSections,
     @required final Option<SectionFailure> sectionFailure,
+    @required final Product product,
   }) = _SectionState;
 
   factory SectionState.initial() => SectionState(
@@ -16,5 +17,6 @@ abstract class SectionState with _$SectionState {
         sections: [],
         edittingSections: [],
         sectionFailure: none(),
+        product: Product.empty(),
       );
 }

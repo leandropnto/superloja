@@ -14,4 +14,6 @@ abstract class SectionEvent with _$SectionEvent {
   const factory SectionEvent.onResfreshEditting(Section section) = _OnResfreshEditting;
   const factory SectionEvent.onAddSection(String type) = _OnAddSection;
   const factory SectionEvent.onRemoveSection(Section section) = _OnRemoveSection;
+  const factory SectionEvent.onRemoveItem(SectionItem item, Section section) = _OnRemoveItem;
+  const factory SectionEvent.onUpdateProduct(SectionItem item) = _OnUpdateProduct;
 }

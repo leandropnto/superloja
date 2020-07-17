@@ -4,12 +4,11 @@ import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/core/widgets/custom_icon_button.dart';
-import 'package:superloja/presentation/pages/home/view_model/section_view.dart';
 
 class SectionHeader extends StatelessWidget {
-  Section section;
+  final Section section;
 
-  SectionHeader({Key key, this.section}) : super(key: key);
+  const SectionHeader({Key key, this.section}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,8 @@ class SectionHeader extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       fontSize: 18,
                     ),
-                    onChanged: (value) =>
-                        section = section.copyWith(name: value),
+//                    onChanged: (value) =>
+//                        section = section.copyWith(name: value),
                     onFieldSubmitted: (value) => context
                         .bloc<SectionBloc>()
                         .add(SectionEvent.onResfreshEditting(

@@ -7,7 +7,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/domain/section/section_item.dart';
-import 'package:superloja/presentation/pages/home/view_model/section_item_view.dart';
 import 'package:superloja/presentation/pages/product/product_edit/widgets/image_source_sheet.dart';
 
 class SectionAddTitleWidget extends StatelessWidget {

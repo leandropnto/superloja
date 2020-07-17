@@ -31,10 +31,13 @@ class SectionList extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, index) => index < section.items.length
                     ? SectionItemTile(
-                  key: ObjectKey("SectionItem$index}"),
+                        key: ObjectKey("SectionItem$index}"),
                         sectionItem: reversed[index],
+                        section: section,
                       )
-                    : SectionAddTitleWidget(section: section,),
+                    : SectionAddTitleWidget(
+                        section: section,
+                      ),
                 separatorBuilder: (_, __) => const SizedBox(
                   width: 4,
                 ),
