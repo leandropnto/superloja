@@ -32,8 +32,8 @@ class LoginButton extends StatelessWidget {
                     const SignInFormEvent.signInWithEmailAndPasswordPressed())
                 : null,
             icon: Icon(FontAwesome.sign_in),
-            label: state.isSubmitting ? CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Colors.white),
+            label: state.isSubmitting ? const CircularProgressIndicator(
+              valueColor:  AlwaysStoppedAnimation(Colors.white),
             ): const Text('ACESSAR'),
             textColor: Colors.white,
           ),

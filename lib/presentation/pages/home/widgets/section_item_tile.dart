@@ -5,11 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/domain/section/section_item.dart';
-import 'package:superloja/presentation/core/constants.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import 'section_product_dialog.dart';
-import 'section_product_tile.dart';
 
 class SectionItemTile extends StatelessWidget {
   final SectionItem sectionItem;

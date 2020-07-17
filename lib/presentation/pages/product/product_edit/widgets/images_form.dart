@@ -68,8 +68,8 @@ class ImagesForm extends StatelessWidget {
             ),
           ),
           if (state.value.isEmpty)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Insira pelo menos uma imagem',
                 style: TextStyle(

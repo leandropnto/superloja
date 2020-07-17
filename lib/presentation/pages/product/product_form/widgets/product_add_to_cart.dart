@@ -30,7 +30,7 @@ class ProductAddToCart extends StatelessWidget {
               : null,
           icon: Icon(FontAwesome.cart_plus),
           label: state.isSubmitting
-              ? CircularProgressIndicator(
+              ? const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.white),
                 )
               : const Text('ADICIONAR AO CARRINHO'),

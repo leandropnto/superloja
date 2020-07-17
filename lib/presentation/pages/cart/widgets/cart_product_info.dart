@@ -16,7 +16,7 @@ class CartProductInfo extends StatelessWidget {
         children: <Widget>[
           Text(
             item.product.name.value.fold((l) => "Nome Inválido", (r) => r),
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 17,
               color: kPrimaryColor,
@@ -24,7 +24,7 @@ class CartProductInfo extends StatelessWidget {
           ),
           Text(
             item.size.sizeName.value.fold((l) => "Tamanho inválido", (r) => "Tamanho: $r"),
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w300,
             ),
           ),

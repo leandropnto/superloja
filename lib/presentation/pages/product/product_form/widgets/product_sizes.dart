@@ -60,7 +60,7 @@ class ProductSizeWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 child: Text(
                   size.sizeName.value.fold((l) => "Nome inválido", (r) => r),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
               Container(
@@ -68,7 +68,7 @@ class ProductSizeWidget extends StatelessWidget {
                 child: Text(
                   size.price.value.fold((l) => 'Preço inválido',
                       (r) => "R\$ ${r.toStringAsFixed(2)}"),
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
               )
             ],
