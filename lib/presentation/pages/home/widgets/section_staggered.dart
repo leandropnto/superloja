@@ -10,7 +10,7 @@ import 'package:superloja/presentation/pages/home/widgets/section_item_tile.dart
 import 'section_header.dart';
 
 class SectionStaggered extends StatelessWidget {
-  final SectionView section;
+  final Section section;
 
   const SectionStaggered({Key key, this.section}) : super(key: key);
 

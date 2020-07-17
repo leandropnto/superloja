@@ -5,22 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/section/section_bloc.dart';
+import 'package:superloja/domain/section/section.dart';
+import 'package:superloja/domain/section/section_item.dart';
 import 'package:superloja/presentation/pages/home/view_model/section_item_view.dart';
-import 'package:superloja/presentation/pages/home/view_model/section_view.dart';
 import 'package:superloja/presentation/pages/product/product_edit/widgets/image_source_sheet.dart';
 
 class SectionAddTitleWidget extends StatelessWidget {
-  final SectionView section;
+  final Section section;
 
   const SectionAddTitleWidget({Key key, this.section}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     void onImageSelected(File file) {
-      section.addItem(SectionItemView(image: file, product: ""));
-      context
-          .bloc<SectionBloc>()
-          .add(SectionEvent.onResfreshEditting(section));
+//      section.addItem(SectionItemView(image: file, product: ""));
+      context.bloc<SectionBloc>().add(
+            SectionEvent.onResfreshEditting(
+              section.copyWith(items: [
+                ...section.items,
+                SectionItem(image: file, product: "")
+              ]),
+            ),
+          );
     }
 
     return AspectRatio(

@@ -7,7 +7,7 @@ import 'package:superloja/presentation/pages/home/widgets/section_staggered.dart
 import 'section_list.dart';
 
 class SectionProducts extends StatelessWidget {
-  final List<SectionView> sections;
+  final List<Section> sections;
   final bool isEditting;
 
   const SectionProducts({Key key, this.sections, this.isEditting})

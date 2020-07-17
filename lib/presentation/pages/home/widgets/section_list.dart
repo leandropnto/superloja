@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
+import 'package:superloja/domain/section/section.dart';
 
-import 'package:superloja/presentation/pages/home/view_model/section_view.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_add_tile_widget.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_header.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_item_tile.dart';
 
 class SectionList extends StatelessWidget {
-  final SectionView section;
+  final Section section;
 
   const SectionList({Key key, this.section}) : super(key: key);
 

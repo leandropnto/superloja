@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:superloja/presentation/pages/home/view_model/section_item_view.dart';
+import 'package:superloja/domain/section/section_item.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class SectionItemTile extends StatelessWidget {
-  final SectionItemView sectionItem;
+  final SectionItem sectionItem;
 
   const SectionItemTile({Key key, this.sectionItem}) : super(key: key);
 

@@ -9,6 +9,7 @@ import 'package:superloja/domain/section/i_section_repository.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/domain/section/section_failure.dart';
 import 'package:superloja/presentation/pages/home/view_model/section_view.dart';
+import 'package:uuid/uuid.dart';
 
 part 'section_event.dart';
 
@@ -42,8 +43,8 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
                   isLoading: false,
                 ), (sections) {
           return state.copyWith(
-            sections: sections.map((e) => SectionView.from(e)).toList(),
-            edittingSections: sections.map((e) => SectionView.from(e)).toList(),
+            sections: sections,
+            edittingSections: [...sections],
             isLoading: false,
           );
         });
@@ -63,29 +64,21 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
       onAddSection: (e) async* {
         yield state.copyWith(edittingSections: [
           ...state.edittingSections,
-          SectionView.from(Section(
+          Section(
+            id: Uuid().v1(),
             name: "Nova",
             type: e.type,
             items: [],
-          )),
+          ),
         ]);
       },
       onRemoveSection: (e) async* {
-        print("Removendo");
         yield state.copyWith(
           edittingSections:
               state.edittingSections.where((l) => l != e.section).toList(),
         );
       },
       onResfreshEditting: (e) async* {
-//        final index = state.edittingSections.indexOf(e.section);
-//        if (index >= 0) {
-//          final items = state.edittingSections
-//            ..removeAt(index)
-//            ..insert(index, e.section);
-//
-//          yield state.copyWith(edittingSections: items);
-//        }
         yield state.copyWith(isLoading: true);
         final updated = state.edittingSections
             .map((l) => l.id == e.section.id ? e.section : l)
