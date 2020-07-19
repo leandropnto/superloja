@@ -29,8 +29,6 @@ class SectionHeader extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       fontSize: 18,
                     ),
-//                    onChanged: (value) =>
-//                        section = section.copyWith(name: value),
                     onFieldSubmitted: (value) => context
                         .bloc<SectionBloc>()
                         .add(SectionEvent.onResfreshEditting(
@@ -38,12 +36,26 @@ class SectionHeader extends StatelessWidget {
                   ),
                 ),
                 CustomIconButton(
+                  iconData: Icons.arrow_drop_down,
+                  onTap: () => context.bloc<SectionBloc>().add(
+                    SectionEvent.onMoveSection(section, 1),
+                  ),
+                  color: kPrimaryColor,
+                ),
+                CustomIconButton(
+                  iconData: Icons.arrow_drop_up,
+                  onTap: () => context.bloc<SectionBloc>().add(
+                    SectionEvent.onMoveSection(section, -1),
+                  ),
+                  color: kPrimaryColor,
+                ),
+                CustomIconButton(
                   iconData: Icons.remove,
                   onTap: () => context.bloc<SectionBloc>().add(
                         SectionEvent.onRemoveSection(section),
                       ),
                   color: kPrimaryColor,
-                )
+                ),
               ],
             )
           : Padding(

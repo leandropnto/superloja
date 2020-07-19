@@ -17,7 +17,7 @@ class CartTotalInvoice extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
+              const Text(
                 'TOTAL:',
                 style: TextStyle(
                   color: kPrimaryColor,
@@ -26,7 +26,7 @@ class CartTotalInvoice extends StatelessWidget {
               ),
               Text(
                 'R\$ ${(state.total + 8.9).toStringAsFixed(2)}',
-                style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w800),
+                style: const TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w800),
               ),
             ],
           ),

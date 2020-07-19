@@ -48,7 +48,7 @@ class SectionItemTile extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 1,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.zero,
             child: sectionItem.image is String
                 ? FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,

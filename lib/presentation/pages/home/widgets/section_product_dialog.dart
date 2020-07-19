@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
+import 'package:superloja/domain/product/product.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/domain/section/section_item.dart';
 import 'package:superloja/presentation/core/constants.dart';
 import 'package:transparent_image/transparent_image.dart';
+
 
 class SectionProductDialog extends StatelessWidget {
   final SectionItem sectionItem;
@@ -67,7 +69,29 @@ class SectionProductDialog extends StatelessWidget {
             },
             textColor: Colors.red,
             child: const Text('Excluir'),
-          )
+          ),
+          FlatButton(
+            onPressed: () async {
+              if (sectionItem.product.isNotEmpty) {
+                context
+                    .bloc<SectionBloc>()
+                    .add(SectionEvent.onUnatachItem(sectionItem, section));
+              } else {
+                final selectedProduct =
+                    await Navigator.of(context).pushNamed("/product/attach");
+                if (selectedProduct != null) {
+                  final id = (selectedProduct as Product).id.getOrCrash();
+                  context.bloc<SectionBloc>().add(SectionEvent.onAttachItem(
+                      sectionItem, section, id));
+                }
+              }
+              Navigator.of(context).pop();
+            },
+            textColor: kPrimaryColor,
+            child: Text(sectionItem.product.isNotEmpty
+                ? 'Desvincular Produto'
+                : 'Vincular Produto'),
+          ),
         ],
       );
     });

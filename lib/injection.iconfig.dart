@@ -58,7 +58,7 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerSingleton<IProductRepository>(
       ProductRepository(g<Firestore>(), g<FirebaseStorage>()));
   g.registerSingleton<ISectionRepository>(
-      FirebaseSectionRepository(g<Firestore>()));
+      FirebaseSectionRepository(g<Firestore>(), g<FirebaseStorage>()));
   g.registerSingleton<IUserFacade>(FirebaseUserFacade(g<Firestore>()));
   g.registerSingleton<CartBloc>(
       CartBloc(g<ICartRepository>(), g<IProductRepository>()));

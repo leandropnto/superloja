@@ -21,7 +21,7 @@ class UsersList extends StatelessWidget {
       itemBuilder: (_, index) => ListTile(
         title: Text(
           users[index].name.value.fold((l) => "Invalido", (r) => r),
-          style: TextStyle(color: kPrimaryColor),
+          style: const TextStyle(color: kPrimaryColor),
         ),
         subtitle:
             Text(users[index].email.value.fold((l) => "Invalido", (r) => r)),
@@ -29,7 +29,7 @@ class UsersList extends StatelessWidget {
       strList: names,
       indexedHeight: (_) => 50,
       showPreview: true,
-      highlightTextStyle: TextStyle(color: kPrimaryColor, fontSize: 20),
+      highlightTextStyle: const TextStyle(color: kPrimaryColor, fontSize: 20),
     );
   }
 }

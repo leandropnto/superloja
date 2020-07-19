@@ -27,6 +27,7 @@ class SectionStaggered extends StatelessWidget {
             ),
             StaggeredGridView.countBuilder(
               key: ObjectKey("grid${section.id}"),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               crossAxisCount: 4,
@@ -44,8 +45,8 @@ class SectionStaggered extends StatelessWidget {
                     ),
               staggeredTileBuilder: (index) =>
                   StaggeredTile.count(2, index.isEven ? 2 : 1),
-              mainAxisSpacing: 4,
-              crossAxisSpacing: 4,
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
             ),
           ],
         ),

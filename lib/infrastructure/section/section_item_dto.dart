@@ -20,6 +20,13 @@ abstract class SectionItemDto implements _$SectionItemDto {
     return SectionItemDto.fromJson(doc.data);
   }
 
+  factory SectionItemDto.fromDomain(SectionItem sectionItem) {
+    return SectionItemDto(
+      image: sectionItem.image as String,
+      product: sectionItem.product
+    );
+  }
+
   SectionItem toDomain() {
     return SectionItem(image: image, product: product ?? "");
   }

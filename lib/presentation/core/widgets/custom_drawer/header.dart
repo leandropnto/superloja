@@ -11,7 +11,7 @@ class Header extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) => Container(
         height: size.height * 0.25,
-        decoration: BoxDecoration(color: kPrimaryColor),
+        decoration: const BoxDecoration(color: kPrimaryColor),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

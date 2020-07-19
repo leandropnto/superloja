@@ -16,6 +16,7 @@ import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
 import 'package:superloja/presentation/pages/cart/cart_page.dart';
 import 'package:superloja/presentation/pages/home/home_page.dart';
+import 'package:superloja/presentation/pages/home/section_select_product_page.dart';
 import 'package:superloja/presentation/pages/product/product_edit/product_edit_page.dart';
 import 'package:superloja/presentation/pages/product/product_form/product_form_page.dart';
 import 'package:superloja/presentation/pages/product/product_list/product_list_page.dart';
@@ -110,6 +111,15 @@ class AppWidget extends StatelessWidget {
                   create: (_) => getIt<ProductEditBloc>()
                     ..add(ProductEditEvent.load(settings.arguments as Product)),
                   child: ProductEditPage(),
+                ),
+              );
+
+            case "/product/attach":
+              return MaterialPageRoute(
+                builder: (context) => BlocProvider<ProductBloc>(
+                  create: (_) => getIt<ProductBloc>()
+                    ..add(const ProductEvent.watchAll()),
+                  child: SectionSelectProductPage(),
                 ),
               );
             case "/cart":

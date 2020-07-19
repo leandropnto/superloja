@@ -21,7 +21,7 @@ class CartButton extends StatelessWidget {
             right: 5,
             child: Container(
                 padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: kPrimaryLightColor,
                 ),

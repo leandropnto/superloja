@@ -51,7 +51,20 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
                 ), (sections) {
           return state.copyWith(
             sections: sections,
-            edittingSections: [...sections],
+            edittingSections: List.from(
+              sections.map(
+                (e) => Section(
+                  id: e.id,
+                  name: e.name,
+                  type: e.type,
+                  order: e.order,
+                  items: e.items
+                      .map((l) =>
+                          SectionItem(image: l.image, product: l.product))
+                      .toList(),
+                ),
+              ),
+            ),
             isLoading: false,
           );
         });
@@ -60,11 +73,24 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
         yield state.copyWith(isEditting: !state.isEditting);
       },
       onCancelEditting: (e) async* {
-        yield state
-            .copyWith(isEditting: false, edittingSections: [...state.sections]);
+        yield state.copyWith(isLoading: true, isEditting: false);
+        add(SectionEvent.sectionsReceived(right(state.sections)));
       },
       onSaveEditting: (e) async* {
-        yield state.copyWith(isEditting: !state.isEditting);
+        yield state.copyWith(
+          isLoading: true,
+        );
+        state.edittingSections.forEach((section) async {
+          final index = state.edittingSections.indexOf(section);
+          await _sectionRepository.updateSection(section, index);
+        });
+
+        state.sections
+            .where((element) => !state.edittingSections.map((s) => s.id).contains(element.id))
+            .forEach((excluded) async => _sectionRepository.remove(excluded));
+
+        yield state.copyWith(isLoading: false, isEditting: false);
+        add(SectionEvent.sectionsReceived(right(state.edittingSections)));
       },
       onAddSection: (e) async* {
         yield state.copyWith(edittingSections: [
@@ -74,6 +100,7 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
             name: "Nova",
             type: e.type,
             items: [],
+            order: state.edittingSections.length,
           ),
         ]);
       },
@@ -113,6 +140,70 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
                   product: r,
                   isLoading: false,
                 ));
+      },
+      onAttachItem: (e) async* {
+        yield state.copyWith(isLoading: true);
+        final updated = state.edittingSections.map(
+          (s) {
+            if (s.id != e.section.id) {
+              return s;
+            } else {
+              final index = s.items.indexOf(e.item);
+              if (index >= 0) {
+                return s.copyWith(
+                    items: s.items
+                      ..removeAt(index)
+                      ..insert(
+                          index,
+                          e.item.copyWith(
+                            product: e.productId,
+                          )));
+              } else {
+                return s;
+              }
+            }
+          },
+        ).toList();
+
+        yield state.copyWith(edittingSections: updated, isLoading: false);
+      },
+      onUnatachItem: (e) async* {
+        yield state.copyWith(isLoading: true);
+        final updated = state.edittingSections.map(
+          (s) {
+            if (s.id != e.section.id) {
+              return s;
+            } else {
+              final index = s.items.indexOf(e.item);
+              if (index >= 0) {
+                return s.copyWith(
+                    items: s.items
+                      ..removeAt(index)
+                      ..insert(index,
+                          SectionItem(image: e.item.image, product: "")));
+              } else {
+                return s;
+              }
+            }
+          },
+        ).toList();
+
+        yield state.copyWith(edittingSections: updated, isLoading: false);
+      },
+      onMoveSection: (e) async* {
+        yield state.copyWith(isLoading: true);
+        final index = state.edittingSections.indexOf(e.section);
+        final newIndex = index+e.movement;
+        final lastIndex = state.edittingSections.length - 1;
+        if (index >= 0 && index <= lastIndex && newIndex >=0 && newIndex <= lastIndex) {
+          yield state.copyWith(
+              edittingSections: state.edittingSections
+                ..removeAt(index)
+                ..insert(index + e.movement,
+                    e.section.copyWith(order: newIndex)));
+        }
+
+        yield state.copyWith(isLoading: false);
       },
     );
   }

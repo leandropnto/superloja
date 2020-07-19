@@ -14,6 +14,7 @@ abstract class SectionDto implements _$SectionDto {
     @JsonKey(ignore: true) String id,
     @required final String name,
     @required final String type,
+    @required final int order,
     @required final List<SectionItemDto> items,
   }) = _SectionDto;
 
@@ -24,13 +25,33 @@ abstract class SectionDto implements _$SectionDto {
     return SectionDto.fromJson(doc.data).copyWith(id: doc.documentID);
   }
 
+  factory SectionDto.fromDomain(Section section) {
+    return SectionDto(
+      name: section.name,
+      type: section.type,
+      id: section.id,
+      order: section.order,
+      items: section.items.map((e) => SectionItemDto.fromDomain(e)).toList(),
+    );
+  }
+
   Section toDomain() {
     return Section(
       id: id,
       name: name,
       type: type,
       items: items.map((e) => e.toDomain()).toList(),
+      order: order,
     );
+  }
+
+  Map<String, dynamic> toMyJson(){
+    return {
+      "name": name,
+      "type": type,
+      "items": items.map((e) => e.toJson()).toList(),
+      "order" : order,
+    };
   }
 
   const SectionDto._();

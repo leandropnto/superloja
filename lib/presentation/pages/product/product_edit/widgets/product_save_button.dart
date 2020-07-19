@@ -24,7 +24,7 @@ class ProductSaveButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         icon: Icon(FontAwesome.save),
-        label: state.isSubmitting ? CircularProgressIndicator(
+        label: state.isSubmitting ? const CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation(Colors.white),
         ) : const Text('Salvar'),
         textColor: Colors.white,

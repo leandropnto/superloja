@@ -10,7 +10,8 @@ abstract class Section with _$Section {
     @required final String id,
     @required final String name,
     @required final String type,
-    @required final List<SectionItem> items,
+    @required final int order,
+    @required final List<SectionItem> items
   }) = _Section;
 
   factory Section.empty() => const Section(
@@ -18,5 +19,6 @@ abstract class Section with _$Section {
         name: '',
         type: '',
         items: [],
+        order: 99,
       );
 }

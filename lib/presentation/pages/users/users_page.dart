@@ -17,12 +17,12 @@ class UsersPage extends StatelessWidget {
       body: BlocBuilder<UsersBloc, UsersState>(
         builder: (context, state) => state.map(
           initial: (e) => Container(),
-          loading: (e) => Center(
+          loading: (e) => const Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation(kPrimaryColor),
             ),
           ),
-          error: (e) => Center(
+          error: (e) => const Center(
             child: Text(
               "Ops... ocorreu um erro. Por favor, tente novamente",
               style: TextStyle(
