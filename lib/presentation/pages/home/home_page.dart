@@ -24,10 +24,34 @@ class HomePage extends StatelessWidget {
           SliverAppBar(
             snap: true,
             floating: true,
+            pinned: true,
             elevation: 0,
-            flexibleSpace: const FlexibleSpaceBar(
-              title: Text('Super Loja'),
+            expandedHeight: 250,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                'Super Loja',
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.left,
+              ),
               centerTitle: true,
+              background: Container(
+                  margin: const EdgeInsets.all(8),
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/images/designer.png",
+                        fit: BoxFit.fitHeight,
+                        height: 130,
+                      ),
+                      Image.asset(
+                        "assets/images/home_2.png",
+                        fit: BoxFit.fitHeight,
+                        height: 130,
+                      ),
+                    ],
+                  )),
             ),
             actions: <Widget>[
               CartButton(),

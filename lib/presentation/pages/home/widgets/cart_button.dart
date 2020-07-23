@@ -27,7 +27,7 @@ class CartButton extends StatelessWidget {
                 ),
                 child: Text(
                   "${state.length}",
-                  style: TextStyle(color: kPrimaryColor, fontSize: 10),
+                  style: const TextStyle(color: kPrimaryColor, fontSize: 10),
                   textAlign: TextAlign.center,
                 )),
           )
