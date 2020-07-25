@@ -11,6 +11,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:superloja/infrastructure/cart/firebase_cart_repository.dart';
 import 'package:superloja/domain/cart/i_cart_repository.dart';
+import 'package:superloja/infrastructure/cep/cep_aberto_service.dart';
+import 'package:superloja/domain/cep/i_cep_service.dart';
 import 'package:superloja/infrastructure/product/product_repository.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
 import 'package:superloja/infrastructure/section/firebase_section_repository.dart';
@@ -22,6 +24,7 @@ import 'package:superloja/application/product/product_edit/product_edit_bloc.dar
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/application/users/users_bloc.dart';
+import 'package:superloja/application/address/address_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/infrastructure/auth/firebase_auth_facade.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
@@ -48,6 +51,7 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SectionBloc>(
       () => SectionBloc(g<ISectionRepository>(), g<IProductRepository>()));
   g.registerFactory<UsersBloc>(() => UsersBloc(g<IUserFacade>()));
+  g.registerFactory<AddressBloc>(() => AddressBloc(g<ICepService>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserFacade>()));
@@ -55,6 +59,7 @@ void $initGetIt(GetIt g, {String environment}) {
 
   //Eager singletons must be registered in the right order
   g.registerSingleton<ICartRepository>(FirebaseCartRepository(g<Firestore>()));
+  g.registerSingleton<ICepService>(CepAbertoService());
   g.registerSingleton<IProductRepository>(
       ProductRepository(g<Firestore>(), g<FirebaseStorage>()));
   g.registerSingleton<ISectionRepository>(

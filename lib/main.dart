@@ -10,6 +10,5 @@ import 'presentation/core/app_widget.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.prod);
-  CepAbertoService().getAddressFromCep(Cep("20771450"));
   runApp(AppWidget());
 }
