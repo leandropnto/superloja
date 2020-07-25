@@ -12,6 +12,7 @@ import 'package:superloja/application/users/users_bloc.dart';
 import 'package:superloja/domain/product/product.dart';
 import 'package:superloja/injection.dart';
 import 'package:superloja/presentation/core/constants.dart';
+import 'package:superloja/presentation/pages/address/address_page.dart';
 import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 import 'package:superloja/presentation/pages/auth/signup/signup_page.dart';
 import 'package:superloja/presentation/pages/cart/cart_page.dart';
@@ -117,8 +118,8 @@ class AppWidget extends StatelessWidget {
             case "/product/attach":
               return MaterialPageRoute(
                 builder: (context) => BlocProvider<ProductBloc>(
-                  create: (_) => getIt<ProductBloc>()
-                    ..add(const ProductEvent.watchAll()),
+                  create: (_) =>
+                      getIt<ProductBloc>()..add(const ProductEvent.watchAll()),
                   child: SectionSelectProductPage(),
                 ),
               );
@@ -126,6 +127,8 @@ class AppWidget extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (context) => CartPage(),
               );
+            case "/address":
+              return MaterialPageRoute(builder: (context) => AddressPage());
             case "/":
             case "/splash":
             default:

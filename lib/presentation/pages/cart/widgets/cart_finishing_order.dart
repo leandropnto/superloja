@@ -19,9 +19,11 @@ class CartFinishingOrder extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.of(context).pushNamed("/address");
+            },
             icon: Icon(FontAwesome.shopping_bag),
-            label: const Text('GERAR PEDIDO'),
+            label: const Text('CONTINUAR PARA ENTREGA'),
             textColor: Colors.white,
           ),
         );
