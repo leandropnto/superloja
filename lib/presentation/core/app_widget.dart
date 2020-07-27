@@ -41,6 +41,7 @@ class AppWidget extends StatelessWidget {
         title: 'Super Loja',
         theme: ThemeData(
           primaryColor: kPrimaryColor,
+          fontFamily: 'RobotoCondensed',
           scaffoldBackgroundColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(

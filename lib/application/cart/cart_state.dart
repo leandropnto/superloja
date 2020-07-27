@@ -23,5 +23,9 @@ abstract class CartState implements _$CartState {
       .map((p) => p.size.price.value.fold((l) => 0, (r) => r) * p.quantity)
       .fold(0, (acc, element) => acc + element);
 
+  int get itemsCount => cartProducts
+      .map((e) => e.quantity)
+      .fold(0, (acc, el) => acc + el);
+
   const CartState._();
 }

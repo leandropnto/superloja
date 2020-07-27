@@ -25,7 +25,7 @@ class CepAbertoService implements ICepService {
       if (response.data.isEmpty) {
         return left(ValueFailure.invalidCep(cep.cleanValue()));
       }
-      print(response.data);
+
       return right(Address.fromJson(response.data));
     } on DioError catch (e) {
       return left(ValueFailure.invalidCep(cep.cleanValue()));
