@@ -29,29 +29,16 @@ class HomePage extends StatelessWidget {
             expandedHeight: 250,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                'Super Loja',
-                style: TextStyle(color: Colors.white),
+                'IHMaginaS❤️',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
                 textAlign: TextAlign.left,
               ),
               centerTitle: true,
-              background: Container(
-                  margin: const EdgeInsets.all(8),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/images/designer.png",
-                        fit: BoxFit.fitHeight,
-                        height: 130,
-                      ),
-                      Image.asset(
-                        "assets/images/home_2.png",
-                        fit: BoxFit.fitHeight,
-                        height: 130,
-                      ),
-                    ],
-                  )),
+              background: Image.asset(
+                "assets/images/logo.jpg",
+                fit: BoxFit.cover,
+
+              ),
             ),
             actions: <Widget>[
               CartButton(),
