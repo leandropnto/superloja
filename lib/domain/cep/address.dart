@@ -2,12 +2,12 @@ class Address {
   Cidade cidade;
   Estado estado;
   double altitude;
-  String longitude;
+  double longitude;
+  double latitude;
   String bairro;
   String complemento;
   String cep;
   String logradouro;
-  String latitude;
 
   Address(
       {this.cidade,
@@ -21,17 +21,19 @@ class Address {
       this.latitude});
 
   Address.fromJson(Map<String, dynamic> json) {
-    cidade =
-        json['cidade'] != null ? Cidade.fromJson(json['cidade'] as Map<String, dynamic>) : null;
-    estado =
-        json['estado'] != null ? Estado.fromJson(json['estado'] as Map<String, dynamic>) : null;
-    altitude = json['altitude'] as double ;
-    longitude = json['longitude'] as String ;
+    cidade = json['cidade'] != null
+        ? Cidade.fromJson(json['cidade'] as Map<String, dynamic>)
+        : null;
+    estado = json['estado'] != null
+        ? Estado.fromJson(json['estado'] as Map<String, dynamic>)
+        : null;
+    altitude = json['altitude'] as double;
+    longitude = double.tryParse(json['longitude'] as String);
+    latitude = double.tryParse(json['latitude'] as String);
     bairro = json['bairro'] as String;
-    complemento = json['complemento'] as String ;
+    complemento = json['complemento'] as String;
     cep = json['cep'] as String;
     logradouro = json['logradouro'] as String;
-    latitude = json['latitude'] as String;
   }
 
   Map<String, dynamic> toJson() {

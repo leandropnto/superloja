@@ -4,7 +4,7 @@ import 'package:superloja/domain/core/failures.dart';
 Either<ValueFailure, String> validateCep(String input) {
   const cepRegex =
       r"\d{5}";
-  if (RegExp(cepRegex).hasMatch(input)) {
+  if (RegExp(cepRegex).hasMatch(input.replaceAll(RegExp(r'\D'), ""))) {
     return right(input);
   } else {
     return left(

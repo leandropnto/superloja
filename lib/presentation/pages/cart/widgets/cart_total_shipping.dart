@@ -12,7 +12,7 @@ class CartTotalShipping extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const <Widget>[
-          Text("Frete:"),
+          Text("Quantidade de Itens:"),
           Text(
             "R\$ 8,90",
             style: TextStyle(fontWeight: FontWeight.w500),

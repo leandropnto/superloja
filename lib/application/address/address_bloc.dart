@@ -32,7 +32,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         initial: (e) async* {},
         loading: (e) async* {
           yield state.copyWith(isLoading: true);
-          final either = await _cepService.getAddressFromCep(e.cep);
+          final either = await _cepService.getAddressFromCep(state.cep);
           print(either);
           yield state.copyWith(
               isLoading: false,
@@ -41,6 +41,9 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         },
         failure: (e) async* {
           yield state.copyWith(isLoading: false);
+        },
+        onChangeCep: (e) async* {
+          yield state.copyWith(cep: Cep(e.cepStr));
         });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:superloja/presentation/pages/cart/widgets/cart_items_count.dart';
 import 'package:superloja/presentation/pages/cart/widgets/cart_total_invoice.dart';
 import 'package:superloja/presentation/pages/cart/widgets/cart_total_shipping.dart';
 import 'package:superloja/presentation/pages/cart/widgets/cart_total_sub_total.dart';
@@ -19,9 +20,10 @@ class CartTotal extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const CartTotalHeader(),
-            const CartTotalSubTotal(),
-            const Divider(),
-            const CartTotalShipping(),
+//            const CartTotalSubTotal(),
+//            const Divider(),
+//            const CartTotalShipping(),
+             const CartItemsCount(),
             const SizedBox(
               height: 12,
             ),
