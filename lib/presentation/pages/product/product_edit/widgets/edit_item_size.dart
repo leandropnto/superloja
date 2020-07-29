@@ -72,7 +72,7 @@ class EditItemSize extends StatelessWidget {
             ),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             validator: (price) => Price(price).mapToErrorMessage("Inválido"),
-            onChanged: (price) => size.price = num.tryParse(price),
+            onChanged: (price) => size.price = num.tryParse(price.replaceAll(RegExp(r'\D'), "")),
             inputFormatters: [
               WhitelistingTextInputFormatter.digitsOnly,
               RealInputFormatter(centavos: true),
