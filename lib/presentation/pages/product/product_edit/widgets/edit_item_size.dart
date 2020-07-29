@@ -1,5 +1,7 @@
 
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
@@ -50,8 +52,10 @@ class EditItemSize extends StatelessWidget {
             ),
             validator: (number) => Stock(number).mapToErrorMessage("Inválido"),
             keyboardType: TextInputType.number,
-            onChanged: (stock) =>  size.stock = int.tryParse(stock)
-            ,
+            onChanged: (stock) =>  size.stock = int.tryParse(stock),
+            inputFormatters: [
+              WhitelistingTextInputFormatter.digitsOnly,
+            ],
           ),
         ),
         const SizedBox(
@@ -69,6 +73,10 @@ class EditItemSize extends StatelessWidget {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             validator: (price) => Price(price).mapToErrorMessage("Inválido"),
             onChanged: (price) => size.price = num.tryParse(price),
+            inputFormatters: [
+              WhitelistingTextInputFormatter.digitsOnly,
+              RealInputFormatter(centavos: true),
+            ],
           ),
         ),
         const SizedBox(

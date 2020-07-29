@@ -63,7 +63,7 @@ Either<ValueFailure, String> validateFullName(String input) {
 
 Either<ValueFailure, num> validatePrice(String input) {
   try{
-    final price = num.parse(input);
+    final price = num.parse(input.replaceAll(RegExp(r'\D'), "")) / 100;
     if (price <= 0.0) {
       return left(ValueFailure.invalidNumber(input));
     }

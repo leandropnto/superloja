@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:superloja/application/address/address_bloc.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
@@ -48,6 +49,11 @@ class AppWidget extends StatelessWidget {
             elevation: 0,
           ),
         ),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
+        supportedLocales: const [Locale('pt', 'BR')],
 //        home: SplashPage(),
         onGenerateRoute: (settings) {
           switch (settings.name) {
