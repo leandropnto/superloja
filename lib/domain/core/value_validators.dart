@@ -60,23 +60,29 @@ Either<ValueFailure, String> validateFullName(String input) {
   }
 }
 
-
 Either<ValueFailure, num> validatePrice(String input) {
-  try{
-    final price = num.parse(input);
+  String valor = "0";
+  try {
+    if (input.indexOf(",") > 0) {
+      valor =
+          input.replaceAll(".", "#").replaceAll("#", "").replaceAll(",", ".");
+    } else {
+      valor = input;
+    }
+    final val = num.parse(valor);
+    final price = val > 100 ? val / 100 : val;
     if (price <= 0.0) {
       return left(ValueFailure.invalidNumber(input));
     }
     return right(price);
-  } on FormatException  {
+  } on FormatException {
     return left(ValueFailure.invalidNumber(input));
   }
-
 }
 
 Either<ValueFailure, int> validateStock(String input) {
-  try{
-    final size =  int.parse(input);
+  try {
+    final size = int.parse(input);
     if (size < 0) {
       return left(ValueFailure.invalidPositivNumber(input));
     }
@@ -85,5 +91,4 @@ Either<ValueFailure, int> validateStock(String input) {
   } on FormatException {
     return left(ValueFailure.invalidNumber(input));
   }
-
 }
