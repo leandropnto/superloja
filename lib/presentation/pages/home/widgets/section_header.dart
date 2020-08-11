@@ -19,7 +19,7 @@ class SectionHeader extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     initialValue: section.name,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Título',
                       isDense: true,
                       border: InputBorder.none,
@@ -38,15 +38,15 @@ class SectionHeader extends StatelessWidget {
                 CustomIconButton(
                   iconData: Icons.arrow_drop_down,
                   onTap: () => context.bloc<SectionBloc>().add(
-                    SectionEvent.onMoveSection(section, 1),
-                  ),
+                        SectionEvent.onMoveSection(section, 1),
+                      ),
                   color: kPrimaryColor,
                 ),
                 CustomIconButton(
                   iconData: Icons.arrow_drop_up,
                   onTap: () => context.bloc<SectionBloc>().add(
-                    SectionEvent.onMoveSection(section, -1),
-                  ),
+                        SectionEvent.onMoveSection(section, -1),
+                      ),
                   color: kPrimaryColor,
                 ),
                 CustomIconButton(

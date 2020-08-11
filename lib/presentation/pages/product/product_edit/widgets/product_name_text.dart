@@ -14,11 +14,11 @@ class ProductNameText extends StatelessWidget {
           const ObjectKey("prdNam0"),
       initialValue:
           productName.value.fold((l) => "Informe o nome", (r) => r) ?? "",
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Nome do produto',
         border: InputBorder.none,
       ),
-      validator: (name){
+      validator: (name) {
         return ProductName(name).mapToErrorMessage("Nome inválido");
       },
       onSaved: (value) => context

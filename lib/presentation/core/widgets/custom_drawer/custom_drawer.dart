@@ -51,12 +51,12 @@ class CustomDrawer extends StatelessWidget {
                       title: "Produtos",
                       onTap: () => Navigator.of(context).pushNamed("/products"),
                     ),
-                    DrawerTile(
+                    const DrawerTile(
                       iconData: FontAwesome.cart_plus,
                       page: 2,
                       title: "Meus Pedidos",
                     ),
-                    DrawerTile(
+                    const DrawerTile(
                       iconData: Icons.location_on,
                       page: 3,
                       title: "Lojas",

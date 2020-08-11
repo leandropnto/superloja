@@ -31,10 +31,12 @@ class LoginButton extends StatelessWidget {
                 ? () => context.bloc<SignInFormBloc>().add(
                     const SignInFormEvent.signInWithEmailAndPasswordPressed())
                 : null,
-            icon: Icon(FontAwesome.sign_in),
-            label: state.isSubmitting ? const CircularProgressIndicator(
-              valueColor:  AlwaysStoppedAnimation(Colors.white),
-            ): const Text('ACESSAR'),
+            icon: const Icon(FontAwesome.sign_in),
+            label: state.isSubmitting
+                ? const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.white),
+                  )
+                : const Text('ACESSAR'),
             textColor: Colors.white,
           ),
         );
@@ -62,7 +64,7 @@ class FacebookButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: onTap,
-        icon: Icon(FontAwesome.facebook),
+        icon: const Icon(FontAwesome.facebook),
         label: const Text('facebook'),
         textColor: Colors.white,
       ),
@@ -89,7 +91,7 @@ class GoogleButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: onTap,
-        icon: Icon(FontAwesome.google),
+        icon: const Icon(FontAwesome.google),
         label: const Text('Google'),
         textColor: Colors.white,
       ),

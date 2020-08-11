@@ -17,22 +17,18 @@ class QuantityProduct extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   disabledColor: kPrimaryLightColor,
-                  icon: Icon(FontAwesome.plus_circle),
+                  icon: const Icon(FontAwesome.plus_circle),
                   color: kPrimaryColor,
                   onPressed: _hasStock(item)
-                      ? () => context
-                          .bloc<CartBloc>()
-                          .add(CartEvent.add(item ))
+                      ? () => context.bloc<CartBloc>().add(CartEvent.add(item))
                       : null,
                 ),
                 Text("${item.quantity}"),
                 IconButton(
-                  icon: Icon(FontAwesome.minus_circle),
+                  icon: const Icon(FontAwesome.minus_circle),
                   color: kPrimaryColor,
                   onPressed: () {
-                    context
-                        .bloc<CartBloc>()
-                        .add(CartEvent.remove(item));
+                    context.bloc<CartBloc>().add(CartEvent.remove(item));
                   },
                 ),
               ],

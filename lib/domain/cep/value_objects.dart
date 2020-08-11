@@ -20,3 +20,25 @@ class Cep extends ValueObject<String> {
 
   const Cep._(this.value);
 }
+
+class AddressNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure, String> value;
+
+  factory AddressNumber(String number) {
+    return AddressNumber._(validateMinLenght(number, 1));
+  }
+
+  const AddressNumber._(this.value);
+}
+
+class AddressComplement extends ValueObject<String> {
+  @override
+  final Either<ValueFailure, String> value;
+
+  factory AddressComplement(String complement) {
+    return AddressComplement._(validateMinLenght(complement, 3));
+  }
+
+  const AddressComplement._(this.value);
+}

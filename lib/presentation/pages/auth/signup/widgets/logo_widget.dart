@@ -10,7 +10,6 @@ class LogoWidget extends StatelessWidget {
       child: SvgPicture.asset(
         "assets/svg/create_user.svg",
         height: size.height * 0.2,
-        fit: BoxFit.contain,
       ),
     );
   }

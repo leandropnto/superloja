@@ -36,7 +36,7 @@ class EmailInput extends StatelessWidget {
           onChanged: (value) => context
               .bloc<SignUpFormBloc>()
               .add(SignUpFormEvent.emailChanged(value)),
-          icon: Icon(Icons.email),
+          icon: const Icon(Icons.email),
           keyboardType: TextInputType.emailAddress,
           hintText: "Informe o email",
           errorText: state.showErrorMessages
@@ -57,9 +57,11 @@ class PasswordInput extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 20),
         child: RoundedInputField(
           obscure: true,
-          icon: Icon(FontAwesome.lock),
+          icon: const Icon(FontAwesome.lock),
           hintText: "Informe a senha",
-          onChanged: (value) => context.bloc<SignUpFormBloc>().add(SignUpFormEvent.passwordChanged(value)),
+          onChanged: (value) => context
+              .bloc<SignUpFormBloc>()
+              .add(SignUpFormEvent.passwordChanged(value)),
           errorText: state.showErrorMessages
               ? state.password.mapToErrorMessage("Informe uma senha válida")
               : null,
@@ -80,8 +82,10 @@ class ConfirmationInput extends StatelessWidget {
         child: RoundedInputField(
           obscure: true,
           hintText: "confirme a seu senha",
-          icon: Icon(FontAwesome.lock),
-          onChanged: (value) => context.bloc<SignUpFormBloc>().add(SignUpFormEvent.confirmPasswordChanged(value)),
+          icon: const Icon(FontAwesome.lock),
+          onChanged: (value) => context
+              .bloc<SignUpFormBloc>()
+              .add(SignUpFormEvent.confirmPasswordChanged(value)),
           errorText: state.showErrorMessages
               ? state.confirmPassword.mapToErrorMessage("Confirmação inválida")
               : null,

@@ -4,7 +4,7 @@ import 'package:superloja/presentation/core/constants.dart';
 class ProductTextSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
       'Tamanhos',
       style: TextStyle(
         fontSize: 18,

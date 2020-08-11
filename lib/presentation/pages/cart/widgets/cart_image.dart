@@ -13,7 +13,6 @@ class CartImage extends StatelessWidget {
         child: SvgPicture.asset(
           state.isEmpty ? "assets/svg/empty_cart.svg" : "assets/svg/cart.svg",
           height: size.height * 0.3,
-          fit: BoxFit.contain,
         ),
       ),
     );

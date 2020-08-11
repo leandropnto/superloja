@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:superloja/presentation/core/constants.dart';
+import 'package:superloja/presentation/pages/address/widgets/address_input_field.dart';
 import 'package:superloja/presentation/pages/address/widgets/cep_input_field.dart';
+
+import 'cep_loaded_field.dart';
 
 class AddreessCard extends StatelessWidget {
   @override
@@ -12,7 +15,7 @@ class AddreessCard extends StatelessWidget {
         child: Form(
           child: Column(
             children: <Widget>[
-              Text(
+              const Text(
                 'Endereço de Entrega',
                 textAlign: TextAlign.start,
                 style: TextStyle(
@@ -22,6 +25,8 @@ class AddreessCard extends StatelessWidget {
                 ),
               ),
               CepInputField(),
+              CepLoadedField(),
+              const AddressInputField(),
             ],
           ),
         ),

@@ -10,7 +10,7 @@ class ProductEditButton extends StatelessWidget {
         builder: (context, state) => state.maybeMap(
             authenticated: (e) => e.user.isAdmin
                 ? IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: const Icon(Icons.edit),
                     onPressed: () => Navigator.of(context).pushNamed(
                       "/product/edit",
                       arguments: context.bloc<ProductFormBloc>().state.product,

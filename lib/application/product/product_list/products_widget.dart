@@ -43,7 +43,7 @@ class ProductsWidget extends StatelessWidget {
                           Text(
                             product.name.value
                                 .fold((f) => "Nome inválido", (nome) => nome),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: kPrimaryColor,
                                 fontSize: 16),
@@ -62,7 +62,7 @@ class ProductsWidget extends StatelessWidget {
                             product.minPrice.price.value.fold(
                                 (l) => "Preço inválido",
                                 (r) => "R\$ ${r.toStringAsFixed(2)}"),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w800,
                               color: kPrimaryColor,

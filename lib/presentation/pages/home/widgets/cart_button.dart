@@ -11,7 +11,7 @@ class CartButton extends StatelessWidget {
       builder: (context, state) => Stack(
         children: <Widget>[
           IconButton(
-            icon: Icon(FontAwesome.shopping_cart),
+            icon: const Icon(FontAwesome.shopping_cart),
             onPressed: () {
               Navigator.of(context).pushNamed("/cart");
             },

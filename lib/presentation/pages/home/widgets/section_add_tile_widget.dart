@@ -50,7 +50,7 @@ class SectionAddTitleWidget extends StatelessWidget {
         },
         child: Container(
           color: Colors.white.withAlpha(100),
-          child: Icon(
+          child: const Icon(
             FontAwesome.plus,
             color: Colors.white,
           ),

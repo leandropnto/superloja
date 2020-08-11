@@ -25,7 +25,7 @@ class InputPasswordWidget extends StatelessWidget {
             child: RoundedInputField(
               enabled: !state.isSubmitting,
               obscure: true,
-              icon: Icon(FontAwesome.lock),
+              icon: const Icon(FontAwesome.lock),
               onChanged: (value) => context
                   .bloc<SignInFormBloc>()
                   .add(SignInFormEvent.passwordChanged(value)),

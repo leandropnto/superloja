@@ -28,7 +28,7 @@ class HomeEditButton extends StatelessWidget {
                               .toList(),
                         )
                       : IconButton(
-                          icon: Icon(FontAwesome.edit),
+                          icon: const Icon(FontAwesome.edit),
                           onPressed: () => context
                               .bloc<SectionBloc>()
                               .add(const SectionEvent.onEditting()),

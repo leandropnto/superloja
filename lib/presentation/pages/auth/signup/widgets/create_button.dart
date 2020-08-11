@@ -23,9 +23,9 @@ class CreateButton extends StatelessWidget {
                     .add(const SignUpFormEvent.signUpWithEmailAndPassword())
                 : null,
             textColor: Colors.white,
-            icon: Icon(FontAwesome.save),
+            icon: const Icon(FontAwesome.save),
             label: state.isSubmitting
-                ? CircularProgressIndicator(
+                ? const CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   )
                 : Text(

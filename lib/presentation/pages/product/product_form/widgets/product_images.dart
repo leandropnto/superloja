@@ -19,7 +19,6 @@ class ProductImages extends StatelessWidget {
               dotIncreasedColor: kPrimaryColor,
               dotSpacing: 20,
               dotSize: 5,
-              dotIncreaseSize: 2,
               defaultImage: const Center(
                 child: Text(
                   'Carregando...',

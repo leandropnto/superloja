@@ -23,14 +23,16 @@ class CartProductInfo extends StatelessWidget {
             ),
           ),
           Text(
-            item.size.sizeName.value.fold((l) => "Tamanho inválido", (r) => "Tamanho: $r"),
+            item.size.sizeName.value
+                .fold((l) => "Tamanho inválido", (r) => "Tamanho: $r"),
             style: const TextStyle(
               fontWeight: FontWeight.w300,
             ),
           ),
           Text(
-            item.size.price.value.fold((l) => "Preço inválido", (r) => "R\$: ${r.toStringAsFixed(2)}"),
-            style: TextStyle(
+            item.size.price.value.fold(
+                (l) => "Preço inválido", (r) => "R\$: ${r.toStringAsFixed(2)}"),
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: kPrimaryColor,
             ),

@@ -33,7 +33,6 @@ class ImagesForm extends StatelessWidget {
               dotColor: kPrimaryColor,
               dotSpacing: 20,
               dotSize: 5,
-              dotIncreaseSize: 2,
               dotIncreasedColor: kPrimaryColor,
               defaultImage: SvgPicture.asset("assets/svg/cart.svg"),
               images: state.value
@@ -49,7 +48,7 @@ class ImagesForm extends StatelessWidget {
                           top: 5,
                           right: 5,
                           child: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.delete,
                               color: Colors.red,
                             ),

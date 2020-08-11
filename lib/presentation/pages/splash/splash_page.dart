@@ -26,8 +26,6 @@ class SplashPage extends StatelessWidget {
               SvgPicture.asset(
                 "assets/svg/login_banner.svg",
                 height: size.height * 0.3,
-                fit: BoxFit.contain,
-                alignment: Alignment.center,
               ),
               const SizedBox(
                 height: 20,

@@ -18,7 +18,7 @@ class ProductAddPhoto extends StatelessWidget {
     return Material(
       color: kPrimaryLightColor,
       child: IconButton(
-        icon: Icon(
+        icon: const Icon(
           FontAwesome.camera,
           color: kPrimaryColor,
           size: 50,

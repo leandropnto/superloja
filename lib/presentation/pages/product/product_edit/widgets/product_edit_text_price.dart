@@ -10,10 +10,13 @@ class ProductEditTextPrice extends StatelessWidget {
       builder: (context, state) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('A partir de', style: TextStyle(color: Colors.grey[600], fontSize: 13),),
+          Text(
+            'A partir de',
+            style: TextStyle(color: Colors.grey[600], fontSize: 13),
+          ),
           Text(
             'R\$ ${state.minPrice.toStringAsFixed(2)}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
               color: kPrimaryColor,

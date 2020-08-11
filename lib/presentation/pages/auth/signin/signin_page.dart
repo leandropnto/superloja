@@ -51,7 +51,6 @@ class SignInPage extends StatelessWidget {
                       SvgPicture.asset(
                         "assets/svg/login_banner.svg",
                         height: size.height * 0.15,
-                        fit: BoxFit.contain,
                       ),
                       const SizedBox(
                         height: 32,
@@ -98,7 +97,8 @@ class SignInPage extends StatelessWidget {
                         height: 30,
                       ),
                       FlatButton(
-                        onPressed: () => Navigator.of(context).pushNamed("/signUp"),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed("/signUp"),
                         child: Text(
                           'Ou crie a sua conta',
                           style: Theme.of(context)

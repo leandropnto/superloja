@@ -40,7 +40,7 @@ class EmptyCart extends StatelessWidget {
                       ),
                       onPressed: () =>
                           Navigator.of(context).pushNamed("/products"),
-                      icon: Icon(FontAwesome.cart_plus),
+                      icon: const Icon(FontAwesome.cart_plus),
                       label: const Text('PRODUTOS'),
                       textColor: Colors.white,
                     ),

@@ -25,8 +25,8 @@ class Header extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 32, bottom: 8),
+              const Padding(
+                padding: EdgeInsets.only(top: 32, bottom: 8),
                 child: Text(
                   "SUPER LOJA",
                   style: TextStyle(
@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
                 ),
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   FontAwesome.user_circle_o,
                   color: Colors.white,
                   size: 45,
@@ -52,7 +52,7 @@ class Header extends StatelessWidget {
                       state.user.name.value.fold((l) => "", (r) => r),
                   unauthenticated: (_) => "Faça o login",
                 )}",
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               )

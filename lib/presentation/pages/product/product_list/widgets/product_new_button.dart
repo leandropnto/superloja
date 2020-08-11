@@ -11,7 +11,7 @@ class ProductNewButton extends StatelessWidget {
       builder: (context, state) => state.maybeMap(
           authenticated: (e) => e.user.isAdmin
               ? IconButton(
-                  icon: Icon(FontAwesome.plus_circle),
+                  icon: const Icon(FontAwesome.plus_circle),
                   onPressed: () => Navigator.of(context).pushNamed(
                     "/product/edit",
                     arguments: Product.empty(),

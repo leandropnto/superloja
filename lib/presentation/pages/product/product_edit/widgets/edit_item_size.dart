@@ -1,4 +1,3 @@
-
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +24,6 @@ class EditItemSize extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
           flex: 30,
@@ -52,7 +50,7 @@ class EditItemSize extends StatelessWidget {
             ),
             validator: (number) => Stock(number).mapToErrorMessage("Inválido"),
             keyboardType: TextInputType.number,
-            onChanged: (stock) =>  size.stock = int.tryParse(stock),
+            onChanged: (stock) => size.stock = int.tryParse(stock),
             inputFormatters: [
               WhitelistingTextInputFormatter.digitsOnly,
             ],
@@ -72,7 +70,8 @@ class EditItemSize extends StatelessWidget {
             ),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             validator: (price) => Price(price).mapToErrorMessage("Inválido"),
-            onChanged: (price) => size.price = num.tryParse(price.replaceAll(RegExp(r'\D'), "")),
+            onChanged: (price) =>
+                size.price = num.tryParse(price.replaceAll(RegExp(r'\D'), "")),
             inputFormatters: [
               WhitelistingTextInputFormatter.digitsOnly,
               RealInputFormatter(centavos: true),

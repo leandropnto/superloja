@@ -49,7 +49,7 @@ class AppWidget extends StatelessWidget {
             elevation: 0,
           ),
         ),
-        localizationsDelegates: [
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:superloja/presentation/core/widgets/rounded_input_field.dart';
 
 class SearchDialog extends StatelessWidget {
-
   final String search;
 
   const SearchDialog({Key key, this.search}) : super(key: key);
@@ -21,7 +20,7 @@ class SearchDialog extends StatelessWidget {
               initialvalue: search,
               textInputAction: TextInputAction.search,
               icon: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

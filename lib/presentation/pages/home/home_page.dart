@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/domain/section/section_failure.dart';
 import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/core/widgets/custom_drawer/custom_drawer.dart';
-import 'package:flutter/material.dart';
 import 'package:superloja/presentation/pages/home/widgets/cart_button.dart';
 import 'package:superloja/presentation/pages/home/widgets/section_loading.dart';
 
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             elevation: 0,
             expandedHeight: 250,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(
+              title: const Text(
                 'Super Loja',
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.left,

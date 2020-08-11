@@ -23,12 +23,14 @@ class ProductAddToCart extends StatelessWidget {
           ),
           onPressed: !state.isSubmitting && state.size != null
               ? () {
-                  context
-                      .bloc<CartBloc>()
-                      .add(CartEvent.add(CartProduct(product: state.product, size: state.size, quantity: 1, id: UniqueId())));
+                  context.bloc<CartBloc>().add(CartEvent.add(CartProduct(
+                      product: state.product,
+                      size: state.size,
+                      quantity: 1,
+                      id: UniqueId())));
                 }
               : null,
-          icon: Icon(FontAwesome.cart_plus),
+          icon: const Icon(FontAwesome.cart_plus),
           label: state.isSubmitting
               ? const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.white),

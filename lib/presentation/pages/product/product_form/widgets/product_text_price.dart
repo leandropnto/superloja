@@ -9,7 +9,7 @@ class ProductTextPrice extends StatelessWidget {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       builder: (context, state) => Text(
         'R\$ ${state.size.price.value.fold((l) => "Selecione", (r) => r.toStringAsFixed(2))}',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
           color: kPrimaryColor,

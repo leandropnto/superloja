@@ -6,7 +6,7 @@ import 'package:superloja/presentation/core/constants.dart';
 class ProductNameText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(
+    const style = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16,
       color: Colors.white,

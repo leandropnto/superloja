@@ -10,11 +10,9 @@ import 'package:superloja/domain/cep/i_cep_service.dart';
 import 'package:superloja/domain/cep/value_objects.dart';
 import 'package:superloja/domain/core/failures.dart';
 
-part 'address_event.dart';
-
-part 'address_state.dart';
-
 part 'address_bloc.freezed.dart';
+part 'address_event.dart';
+part 'address_state.dart';
 
 @injectable
 class AddressBloc extends Bloc<AddressEvent, AddressState> {
@@ -32,10 +30,11 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         initial: (e) async* {},
         loading: (e) async* {
           yield state.copyWith(isLoading: true);
-          final either = await _cepService.getAddressFromCep(state.cep);
-          print(either);
+          final cep = Cep(state.strCep);
+          final either = await _cepService.getAddressFromCep(cep);
           yield state.copyWith(
               isLoading: false,
+              cep: some(cep),
               failureOrSuccess:
                   some(either.fold((l) => left(l), (r) => right(r))));
         },
@@ -43,7 +42,10 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           yield state.copyWith(isLoading: false);
         },
         onChangeCep: (e) async* {
-          yield state.copyWith(cep: Cep(e.cepStr));
+          yield state.copyWith(strCep: e.cepStr);
+        },
+        clear: (e) async* {
+          yield state.copyWith(strCep: '', cep: none());
         });
   }
 }

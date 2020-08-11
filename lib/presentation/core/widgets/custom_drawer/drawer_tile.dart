@@ -9,7 +9,6 @@ class DrawerTile extends StatelessWidget {
   final int page;
   final VoidCallback onTap;
 
-
   const DrawerTile({
     Key key,
     this.iconData,
@@ -20,7 +19,6 @@ class DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<DrawerBloc, DrawerState>(
       builder: (BuildContext context, DrawerState state) {
         return InkWell(
@@ -40,7 +38,7 @@ class DrawerTile extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: kPrimaryColor,

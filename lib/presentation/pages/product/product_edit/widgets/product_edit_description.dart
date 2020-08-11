@@ -28,7 +28,7 @@ class ProductEditDescription extends StatelessWidget {
             initialValue: description.value
                     .fold((l) => "Informe a descrição do produto", (r) => r) ??
                 "",
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Descrição',
               border: InputBorder.none,
             ),
