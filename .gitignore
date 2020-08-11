@@ -49,3 +49,5 @@ app.*.map.json
 **/**.lock
 **/**.g.dart
 /ios/Podfile
+out/
+/ios/Flutter/.last_build_id
