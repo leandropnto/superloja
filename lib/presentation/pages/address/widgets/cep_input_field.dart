@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/address/address_bloc.dart';
-import 'package:superloja/domain/cep/value_objects.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
 class CepInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddressBloc, AddressState>(
-      builder: (context, state) => state.cep.isNone()
+      builder: (context, state) => state.failureOrSuccess.isNone() ||
+              state.failureOrSuccess.fold(() => true, (a) => a.isLeft())
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -30,7 +30,7 @@ class CepInputField extends StatelessWidget {
                       .bloc<AddressBloc>()
                       .add(AddressEvent.onChangeCep(value)),
                   validator: (value) =>
-                      Cep(state.strCep).isNotValid() ? 'Cep inválido!' : null,
+                      state.cep.isNotValid() ? 'Cep inválido!' : null,
                 ),
                 RaisedButton(
                   onPressed: () {

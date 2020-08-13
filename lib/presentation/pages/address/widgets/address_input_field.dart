@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/address/address_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
+import 'package:superloja/presentation/core/extensions/widgets_extension.dart';
 import 'package:superloja/presentation/pages/address/widgets/calc_shipping_button.dart';
 import 'package:superloja/presentation/pages/address/widgets/row_city_state.dart';
 
@@ -16,7 +17,7 @@ class AddressInputField extends StatelessWidget {
       if (state.isLoading) {
         return const CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation(kPrimaryColor),
-        );
+        ).padding(8);
       } else {
         return state.failureOrSuccess.fold(
           () => Container(),
@@ -28,7 +29,7 @@ class AddressInputField extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   TextFormField(
-                    initialValue: r.logradouro,
+                    initialValue: r.street,
                     enabled: false,
                     decoration: const InputDecoration(
                       isDense: true,
@@ -39,7 +40,7 @@ class AddressInputField extends StatelessWidget {
                   ),
                   RowNumberComplement(),
                   TextFormField(
-                    initialValue: r.bairro,
+                    initialValue: r.districty,
                     enabled: false,
                     decoration: const InputDecoration(
                       isDense: true,

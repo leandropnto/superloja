@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:superloja/domain/cep/address.dart';
+import 'package:superloja/domain/address/address.dart';
 import 'package:superloja/domain/cep/i_cep_service.dart';
 import 'package:superloja/domain/cep/value_objects.dart';
 import 'package:superloja/domain/core/failures.dart';

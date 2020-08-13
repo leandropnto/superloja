@@ -7,15 +7,15 @@ class CepLoadedField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddressBloc, AddressState>(
-      builder: (context, state) => state.cep.fold(
+      builder: (context, state) => state.failureOrSuccess.fold(
         () => Container(),
-        (a) => a.failureOrUnit.fold(
+        (a) => a.fold(
           (l) => Container(),
           (r) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "CEP: ${state.strCep}",
+                "CEP: ${r.zipcode}",
                 style: const TextStyle(
                     color: kPrimaryColor,
                     fontWeight: FontWeight.bold,

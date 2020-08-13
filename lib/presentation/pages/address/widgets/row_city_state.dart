@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/address/address_bloc.dart';
-import 'package:superloja/domain/cep/address.dart';
+import 'package:superloja/domain/address/address.dart';
 
 class RowCityState extends StatelessWidget {
   final Address address;
@@ -16,7 +16,7 @@ class RowCityState extends StatelessWidget {
                   flex: 3,
                   child: TextFormField(
                     enabled: false,
-                    initialValue: address.cidade.nome,
+                    initialValue: address.city.nome,
                     decoration: const InputDecoration(
                       isDense: true,
                       labelText: 'Cidade',
@@ -27,7 +27,7 @@ class RowCityState extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     enabled: false,
-                    initialValue: address.estado.sigla,
+                    initialValue: address.state.sigla,
                     decoration: const InputDecoration(
                       isDense: true,
                       labelText: 'Estado',

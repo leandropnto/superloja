@@ -1,4 +1,6 @@
-import 'package:superloja/domain/cep/address.dart';
+import 'package:superloja/domain/address/address.dart';
+import 'package:superloja/domain/address/city.dart';
+import 'package:superloja/domain/address/state.dart';
 import 'package:superloja/domain/cep/address_coordenates.dart';
 
 class AddressDto {
@@ -23,16 +25,16 @@ class AddressDto {
 
   Address toDomain() {
     return Address(
-      bairro: bairro,
-      cep: cep,
-      cidade: cidade.toDomain(),
+      districty: bairro,
+      zipcode: cep,
+      city: cidade.toDomain(),
       coordenates: AddressCoordenates(
         altitude: 0,
         latitude: latitude,
         longitude: longitude,
       ),
-      logradouro: logradouro,
-      estado: State(sigla: estado.sigla),
+      street: logradouro,
+      state: State(sigla: estado.sigla),
     );
   }
 }
