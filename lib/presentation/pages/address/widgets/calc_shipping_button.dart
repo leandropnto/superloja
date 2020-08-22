@@ -13,7 +13,10 @@ class CalcShippingButton extends StatelessWidget {
             ? () {
                 if (Form.of(context).validate()) {
                   //context.bloc<AddressBloc>().add(const AddressEvent.loading());
-                  print("ta valido!");
+                  Form.of(context).save();
+                  context
+                      .bloc<AddressBloc>()
+                      .add(const AddressEvent.calcShippment());
                 }
               }
             : null,

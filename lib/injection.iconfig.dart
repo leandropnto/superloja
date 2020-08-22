@@ -13,10 +13,14 @@ import 'package:superloja/infrastructure/cart/firebase_cart_repository.dart';
 import 'package:superloja/domain/cart/i_cart_repository.dart';
 import 'package:superloja/infrastructure/cep/cep_aberto_service.dart';
 import 'package:superloja/domain/cep/i_cep_service.dart';
+import 'package:superloja/infrastructure/distance/distance_firebase.dart';
+import 'package:superloja/domain/distance/i_distance_repository.dart';
 import 'package:superloja/infrastructure/product/product_repository.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
 import 'package:superloja/infrastructure/section/firebase_section_repository.dart';
 import 'package:superloja/domain/section/i_section_repository.dart';
+import 'package:superloja/infrastructure/distance/shipment_service.dart';
+import 'package:superloja/domain/distance/i_shippment_service.dart';
 import 'package:superloja/infrastructure/user/firebase_user_facade.dart';
 import 'package:superloja/domain/user/i_user_facade.dart';
 import 'package:superloja/application/product/product_list/product_bloc.dart';
@@ -51,7 +55,8 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SectionBloc>(
       () => SectionBloc(g<ISectionRepository>(), g<IProductRepository>()));
   g.registerFactory<UsersBloc>(() => UsersBloc(g<IUserFacade>()));
-  g.registerFactory<AddressBloc>(() => AddressBloc(g<ICepService>()));
+  g.registerFactory<AddressBloc>(
+      () => AddressBloc(g<ICepService>(), g<IShippmentService>()));
   g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserFacade>()));
@@ -60,10 +65,13 @@ void $initGetIt(GetIt g, {String environment}) {
   //Eager singletons must be registered in the right order
   g.registerSingleton<ICartRepository>(FirebaseCartRepository(g<Firestore>()));
   g.registerSingleton<ICepService>(CepAbertoService());
+  g.registerSingleton<IDistanceRepository>(DistanceFirebase(g<Firestore>()));
   g.registerSingleton<IProductRepository>(
       ProductRepository(g<Firestore>(), g<FirebaseStorage>()));
   g.registerSingleton<ISectionRepository>(
       FirebaseSectionRepository(g<Firestore>(), g<FirebaseStorage>()));
+  g.registerSingleton<IShippmentService>(
+      ShipmentService(g<Firestore>(), g<IDistanceRepository>()));
   g.registerSingleton<IUserFacade>(FirebaseUserFacade(g<Firestore>()));
   g.registerSingleton<CartBloc>(
       CartBloc(g<ICartRepository>(), g<IProductRepository>()));

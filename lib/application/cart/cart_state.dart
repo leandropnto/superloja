@@ -7,12 +7,14 @@ abstract class CartState implements _$CartState {
     @required final List<CartProduct> cartProducts,
     @required
         final Option<Either<CartFailures, Unit>> cartFailureOrSuccessOption,
+    @required Option<Address> address,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
         cart: [],
         cartProducts: [],
         cartFailureOrSuccessOption: none(),
+        address: none(),
       );
 
   int get length => cartProducts.length;
@@ -23,9 +25,8 @@ abstract class CartState implements _$CartState {
       .map((p) => p.size.price.value.fold((l) => 0, (r) => r) * p.quantity)
       .fold(0, (acc, element) => acc + element);
 
-  int get itemsCount => cartProducts
-      .map((e) => e.quantity)
-      .fold(0, (acc, el) => acc + el);
+  int get itemsCount =>
+      cartProducts.map((e) => e.quantity).fold(0, (acc, el) => acc + el);
 
   const CartState._();
 }

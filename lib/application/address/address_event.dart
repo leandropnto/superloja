@@ -10,4 +10,5 @@ abstract class AddressEvent with _$AddressEvent {
   const factory AddressEvent.onChangeNumber(String number) = _OnChangeNumber;
   const factory AddressEvent.onChangeComplement(String complement) =
       _OnChangeComplement;
+  const factory AddressEvent.calcShippment() = _CalcShippment;
 }

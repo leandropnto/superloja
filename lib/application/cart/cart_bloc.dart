@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:superloja/domain/address/address.dart';
 import 'package:superloja/domain/cart/cart_failures.dart';
 import 'package:superloja/domain/cart/cart_item.dart';
 import 'package:superloja/domain/cart/cart_product.dart';
@@ -13,11 +14,9 @@ import 'package:superloja/domain/core/value_objects.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
 import 'package:superloja/domain/product/product.dart';
 
-part 'cart_event.dart';
-
-part 'cart_state.dart';
-
 part 'cart_bloc.freezed.dart';
+part 'cart_event.dart';
+part 'cart_state.dart';
 
 @Singleton()
 class CartBloc extends Bloc<CartEvent, CartState> {
@@ -26,7 +25,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   StreamSubscription<Either<CartFailures, List<CartItem>>> _cartSubscription;
 
   CartBloc(this._cartRepository, this._productRepository)
-      : assert(_cartRepository != null), super(CartState.initial());
+      : assert(_cartRepository != null),
+        super(CartState.initial());
 
   @override
   Stream<CartState> mapEventToState(
@@ -81,6 +81,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         }) as Future<List<CartProduct>>);
 
         yield state.copyWith(cartProducts: cart);
+      },
+      setAddress: (e) async* {
+        yield state.copyWith(address: some(e.address));
       },
     );
   }

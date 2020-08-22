@@ -37,7 +37,7 @@ class AddressComplement extends ValueObject<String> {
   final Either<ValueFailure, String> value;
 
   factory AddressComplement(String complement) {
-    return AddressComplement._(validateMinLenght(complement, 3));
+    return AddressComplement._(validateMinLenght(complement, 0));
   }
 
   const AddressComplement._(this.value);
