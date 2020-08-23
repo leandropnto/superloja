@@ -5,19 +5,15 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/domain/auth/auth_failures.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/auth/user.dart';
 import 'package:superloja/domain/auth/value_objects.dart';
 import 'package:superloja/domain/user/i_user_facade.dart';
-import 'package:superloja/injection.dart';
-
-part 'sign_up_form_event.dart';
-
-part 'sign_up_form_state.dart';
 
 part 'sign_up_form_bloc.freezed.dart';
+part 'sign_up_form_event.dart';
+part 'sign_up_form_state.dart';
 
 @injectable
 class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
@@ -28,7 +24,8 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
     this._authFacade,
     this._userFacade,
   )   : assert(_authFacade != null),
-        assert(_userFacade != null), super(SignUpFormState.initial());
+        assert(_userFacade != null),
+        super(SignUpFormState.initial());
 
   @override
   Stream<SignUpFormState> mapEventToState(
@@ -90,10 +87,8 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
           await _userFacade.createUser(
               user.copyWith(name: state.fullName, email: state.emailAddress));
 
-          getIt<AuthBloc>().add( AuthEvent.refresh(user: user.copyWith(name: state.fullName,)));
+          //getIt<AuthBloc>().add( AuthEvent.refresh(user: user.copyWith(name: state.fullName,)));
         });
-
-
 
         yield state.copyWith(
             isSubmitting: false, authFailureOrSuccessOption: some(result));

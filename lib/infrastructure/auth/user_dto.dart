@@ -6,7 +6,6 @@ import 'package:superloja/domain/core/value_objects.dart';
 import 'package:superloja/infrastructure/core/server_timestamp_converter.dart';
 
 part 'user_dto.freezed.dart';
-
 part 'user_dto.g.dart';
 
 @freezed
@@ -41,7 +40,8 @@ abstract class UserDto implements _$UserDto {
       _$UserDtoFromJson(json);
 
   factory UserDto.fromFirestore(DocumentSnapshot doc) {
-    return UserDto.fromJson(doc.data).copyWith(id: doc.documentID);
+    return UserDto.fromJson(doc.data)
+        .copyWith(id: doc.documentID, isAdmin: false);
   }
 
   const UserDto._();

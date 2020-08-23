@@ -9,8 +9,11 @@ class SectionProducts extends StatelessWidget {
   final List<Section> sections;
   final bool isEditting;
 
-  const SectionProducts({Key key, this.sections, this.isEditting})
-      : super(key: key);
+  const SectionProducts({
+    Key key,
+    this.sections,
+    this.isEditting = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
 class SectionAddSection extends StatelessWidget {
@@ -14,9 +12,9 @@ class SectionAddSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           FlatButton(
-            onPressed: () => context
-                .bloc<SectionBloc>()
-                .add(const SectionEvent.onAddSection('List')),
+//            onPressed: () => context
+//                .bloc<SectionBloc>()
+//                .add(const SectionEvent.onAddSection('List')),
             splashColor: kPrimaryColor.withOpacity(.3),
             child: const Text(
               "Adicionar Lista",
@@ -24,9 +22,9 @@ class SectionAddSection extends StatelessWidget {
             ),
           ),
           FlatButton(
-            onPressed: () => context
-                .bloc<SectionBloc>()
-                .add(const SectionEvent.onAddSection('Staggered')),
+//            onPressed: () => context
+//                .bloc<SectionBloc>()
+//                .add(const SectionEvent.onAddSection('Staggered')),
             splashColor: kPrimaryColor.withOpacity(.3),
             child: const Text(
               'Adicionar Grade',

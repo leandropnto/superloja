@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:superloja/domain/auth/auth_failures.dart';
+import 'package:superloja/domain/auth/firebase_user_mapper.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/auth/user.dart';
 import 'package:superloja/domain/auth/value_objects.dart';
-import 'package:superloja/domain/auth/firebase_user_mapper.dart';
 import 'package:superloja/domain/core/value_objects.dart';
 import 'package:superloja/domain/user/i_user_facade.dart';
 import 'package:superloja/infrastructure/auth/user_dto.dart';
@@ -20,8 +20,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   final IUserFacade _userFacade;
   final Firestore _firestore;
 
-  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn, this._userFacade,
-      this._firestore)
+  FirebaseAuthFacade(
+      this._firebaseAuth, this._googleSignIn, this._userFacade, this._firestore)
       : assert(_firebaseAuth != null),
         assert(_googleSignIn != null),
         assert(_userFacade != null),
@@ -69,14 +69,19 @@ class FirebaseAuthFacade implements IAuthFacade {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: pswd);
       final firebaseUser = await _firebaseAuth.currentUser();
-      final document = await _firestore.collection("users").document(
-          firebaseUser.uid).get();
-      final admin = await _firestore.collection("admins").document(firebaseUser.uid).get();
-      final user = UserDto.fromFirestore(document).copyWith(isAdmin: admin.exists).toDomain();
+      final document =
+          await _firestore.collection("users").document(firebaseUser.uid).get();
+      final admin = await _firestore
+          .collection("admins")
+          .document(firebaseUser.uid)
+          .get();
+      final user = UserDto.fromFirestore(document)
+          .copyWith(isAdmin: admin.exists)
+          .toDomain();
       return right(user);
     } on PlatformException catch (e) {
       return (e.code == 'ERROR_USER_NOT_FOUND' ||
-          e.code == 'ERROR_WRONG_PASSWORD')
+              e.code == 'ERROR_WRONG_PASSWORD')
           ? left(const AuthFailures.invalidEmailAndPasswordCombination())
           : left(const AuthFailures.serverError());
     }

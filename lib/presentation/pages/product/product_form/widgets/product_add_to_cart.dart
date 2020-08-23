@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
-import 'package:superloja/domain/cart/cart_product.dart';
-import 'package:superloja/domain/core/value_objects.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
 class ProductAddToCart extends StatelessWidget {
@@ -21,15 +18,15 @@ class ProductAddToCart extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
-          onPressed: !state.isSubmitting && state.size != null
-              ? () {
-                  context.bloc<CartBloc>().add(CartEvent.add(CartProduct(
-                      product: state.product,
-                      size: state.size,
-                      quantity: 1,
-                      id: UniqueId())));
-                }
-              : null,
+//          onPressed: !state.isSubmitting && state.size != null
+//              ? () {
+//                  context.bloc<CartBloc>().add(CartEvent.add(CartProduct(
+//                      product: state.product,
+//                      size: state.size,
+//                      quantity: 1,
+//                      id: UniqueId())));
+//                }
+//              : null,
           icon: const Icon(FontAwesome.cart_plus),
           label: state.isSubmitting
               ? const CircularProgressIndicator(

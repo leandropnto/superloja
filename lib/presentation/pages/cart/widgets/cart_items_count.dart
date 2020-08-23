@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:superloja/application/cart/cart_bloc.dart';
 
 class CartItemsCount extends StatelessWidget {
   TextStyle get style => const TextStyle(
@@ -11,22 +9,21 @@ class CartItemsCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      builder: (context, state) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              'Quantidade de Itens:',
-              style: style,
-            ),
-            Text(
-              "${state.itemsCount}",
-              style: style,
-            )
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Quantidade de Itens:',
+            style: style,
+          ),
+          Text(
+            "000",
+            //"${state.itemsCount}",
+            style: style,
+          )
+        ],
       ),
     );
   }

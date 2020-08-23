@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:get/get.dart';
+import 'package:superloja/application/auth/auth_bloc.dart';
+import 'package:superloja/domain/auth/value_objects.dart';
 import 'package:superloja/presentation/core/widgets/rounded_input_field.dart';
 
 class InputPasswordWidget extends StatelessWidget {
+  final TextEditingController controller;
+
   const InputPasswordWidget({
     Key key,
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInFormBloc, SignInFormState>(
-        buildWhen: (old, current) => old.password != current.password,
-        builder: (context, state) {
-          return Container(
-            alignment: Alignment.bottomLeft,
-            height: 80,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: RoundedInputField(
-              enabled: !state.isSubmitting,
-              obscure: true,
-              icon: const Icon(FontAwesome.lock),
-              onChanged: (value) => context
-                  .bloc<SignInFormBloc>()
-                  .add(SignInFormEvent.passwordChanged(value)),
-              keyboardType: TextInputType.text,
-              errorText: state.showErrorMessages
-                  ? state.password
-                      .mapToErrorMessage("Informe uma senha válida!")
-                  : null,
-            ),
-          );
-        });
+    return Container(
+      alignment: Alignment.bottomLeft,
+      height: 80,
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: GetBuilder<AuthBloc>(
+        builder: (bloc) => RoundedInputField(
+          obscure: true,
+          controller: controller,
+          icon: const Icon(FontAwesome.lock),
+          keyboardType: TextInputType.text,
+          onSaved: (value) => bloc.passwordController.text = value,
+          onValidate: (value) => Password.from(value).isNotValid()
+              ? "Informe uma senha válida"
+              : null,
+        ),
+      ),
+    );
   }
 }

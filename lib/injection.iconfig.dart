@@ -32,9 +32,7 @@ import 'package:superloja/application/address/address_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/infrastructure/auth/firebase_auth_facade.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
-import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:superloja/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -57,7 +55,6 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<UsersBloc>(() => UsersBloc(g<IUserFacade>()));
   g.registerFactory<AddressBloc>(
       () => AddressBloc(g<ICepService>(), g<IShippmentService>()));
-  g.registerFactory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
   g.registerFactory<SignUpFormBloc>(
       () => SignUpFormBloc(g<IAuthFacade>(), g<IUserFacade>()));
   g.registerFactory<DrawerBloc>(() => DrawerBloc(g<IAuthFacade>()));
@@ -81,7 +78,6 @@ void $initGetIt(GetIt g, {String environment}) {
     g<IUserFacade>(),
     g<Firestore>(),
   ));
-  g.registerSingleton<AuthBloc>(AuthBloc(g<IAuthFacade>()));
 }
 
 class _$FireBaseInjectableModule extends FireBaseInjectableModule {}

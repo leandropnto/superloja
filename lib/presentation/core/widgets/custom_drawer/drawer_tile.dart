@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:superloja/application/drawer/drawer_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
 class DrawerTile extends StatelessWidget {
@@ -19,36 +17,32 @@ class DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DrawerBloc, DrawerState>(
-      builder: (BuildContext context, DrawerState state) {
-        return InkWell(
-          onTap: onTap,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            height: 60,
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  iconData,
-                  size: 32,
-                  color: kPrimaryColor,
-                ),
-                const SizedBox(
-                  width: 24,
-                ),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: kPrimaryColor,
-                  ),
-                )
-              ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        height: 60,
+        child: Row(
+          children: <Widget>[
+            Icon(
+              iconData,
+              size: 32,
+              color: kPrimaryColor,
             ),
-          ),
-        );
-      },
+            const SizedBox(
+              width: 24,
+            ),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: kPrimaryColor,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

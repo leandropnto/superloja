@@ -9,9 +9,9 @@ import 'package:superloja/domain/section/i_section_repository.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/domain/section/section_failure.dart';
 import 'package:superloja/domain/section/section_item.dart';
+import 'package:superloja/infrastructure/core/file_helpers.dart';
 import 'package:superloja/infrastructure/section/section_dto.dart';
 import 'package:uuid/uuid.dart';
-import 'package:superloja/infrastructure/core/file_helpers.dart';
 
 @Singleton(as: ISectionRepository)
 class FirebaseSectionRepository implements ISectionRepository {
@@ -25,18 +25,17 @@ class FirebaseSectionRepository implements ISectionRepository {
         _home = _firestore.collection("sections");
 
   @override
-  Stream<Either<SectionFailure, List<Section>>> watchSections() async* {
+  Stream<List<Section>> watchSections() async* {
     yield* _home.orderBy('order').snapshots().map(
-          (snapshot) => right(
-            snapshot.documents
-                .map((doc) => SectionDto.fromFirestore(doc).toDomain())
-                .toList(),
-          ),
+          (snapshot) => snapshot.documents
+              .map((doc) => SectionDto.fromFirestore(doc).toDomain())
+              .toList(),
         );
   }
 
   @override
-  Future<Either<SectionFailure, Section>> updateSection(Section section, int index) async {
+  Future<Either<SectionFailure, Section>> updateSection(
+      Section section, int index) async {
     final reference = _storage.ref();
     try {
       final updated = await Future.wait(
@@ -58,7 +57,8 @@ class FirebaseSectionRepository implements ISectionRepository {
       );
 
       _home.document(section.id).setData(
-          SectionDto.fromDomain(section.copyWith(items: updated, order: index)).toMyJson());
+          SectionDto.fromDomain(section.copyWith(items: updated, order: index))
+              .toMyJson());
       return right(section);
     } catch (e) {
       return left(const SectionFailure.serverError());

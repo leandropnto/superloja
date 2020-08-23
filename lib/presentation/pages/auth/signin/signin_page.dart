@@ -1,8 +1,8 @@
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:superloja/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:get/get.dart';
+import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/presentation/pages/auth/signin/widgets/input_email_widget.dart';
 import 'package:superloja/presentation/pages/auth/signin/widgets/input_password_widget.dart';
 import 'package:superloja/presentation/pages/auth/signin/widgets/social_button_widget.dart';
@@ -10,37 +10,18 @@ import 'package:superloja/presentation/pages/auth/signin/widgets/social_button_w
 import 'widgets/background.dart';
 
 class SignInPage extends StatelessWidget {
+  final AuthBloc authController = AuthBloc.to;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: Background(
-        child: BlocConsumer<SignInFormBloc, SignInFormState>(
-          listenWhen: (old, current) =>
-              old.authFailureOrSuccessOption !=
-              current.authFailureOrSuccessOption,
-          listener: (context, state) {
-            state.authFailureOrSuccessOption.fold(
-              () => {},
-              (errorOrSucces) {
-                errorOrSucces.fold((failure) {
-                  FlushbarHelper.createError(
-                    message: failure.map(
-                      cancelledByUser: (_) => "Cancelado...",
-                      serverError: (_) => "Ops... Ocorreu um erro",
-                      emailAlreadyInUse: (_) => "Email em uso",
-                      invalidEmailAndPasswordCombination: (_) =>
-                          "email ou senha inválidos",
-                      userDisabled: (value) => "Usuario desabilitado",
-                      userNotFound: (value) => "Usuário nao encontrado",
-                    ),
-                  ).show(context);
-                }, (_) => Navigator.of(context).pushReplacementNamed("/home"));
-              },
-            );
-          },
-          builder: (context, state) => SafeArea(
+        child: SafeArea(
+          child: Form(
+            key: _formKey,
             child: Column(
               children: <Widget>[
                 Expanded(
@@ -55,7 +36,7 @@ class SignInPage extends StatelessWidget {
                       const SizedBox(
                         height: 32,
                       ),
-                      const InputEmailWidget(),
+                      InputEmailWidget(),
                       const SizedBox(
                         height: 16,
                       ),
@@ -72,7 +53,14 @@ class SignInPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      const LoginButton(),
+                      LoginButton(onTap: () {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          SystemChannels.textInput
+                              .invokeMethod("TextInput.hide");
+                          authController.signInWithEmailAndPassword(context);
+                        }
+                      }),
                       const SizedBox(
                         height: 8,
                       ),
@@ -108,6 +96,10 @@ class SignInPage extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                      GetBuilder<AuthBloc>(
+                          builder: (controller) => controller.isLoading.value
+                              ? const LinearProgressIndicator()
+                              : Container())
                     ],
                   ),
                 ),

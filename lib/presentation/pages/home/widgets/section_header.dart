@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/domain/section/section.dart';
 import 'package:superloja/presentation/core/constants.dart';
@@ -12,63 +12,57 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SectionBloc, SectionState>(builder: (context, state) {
-      return state.isEditting
-          ? Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextFormField(
-                    initialValue: section.name,
-                    decoration: const InputDecoration(
-                      hintText: 'Título',
-                      isDense: true,
-                      border: InputBorder.none,
+    return GetBuilder<SectionBloc>(
+      builder: (bloc) => Obx(
+        () => bloc.isEditing.value
+            ? Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextFormField(
+                      initialValue: section.name,
+                      decoration: const InputDecoration(
+                        hintText: 'Título',
+                        isDense: true,
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
+                      ),
+                      onChanged: (value) =>
+                          bloc.sectionChangeTitle(section, value),
                     ),
-                    style: const TextStyle(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 18,
-                    ),
-                    onFieldSubmitted: (value) => context
-                        .bloc<SectionBloc>()
-                        .add(SectionEvent.onResfreshEditting(
-                            section.copyWith(name: value))),
+                  ),
+                  CustomIconButton(
+                    iconData: Icons.arrow_drop_down,
+                    onTap: () => bloc.moveSection(section, 1),
+                    color: kPrimaryColor,
+                  ),
+                  CustomIconButton(
+                    iconData: Icons.arrow_drop_up,
+                    onTap: () => bloc.moveSection(section, -1),
+                    color: kPrimaryColor,
+                  ),
+                  CustomIconButton(
+                    iconData: Icons.remove,
+                    onTap: () => bloc.removeSection(section),
+                    color: kPrimaryColor,
+                  ),
+                ],
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  section.name,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                CustomIconButton(
-                  iconData: Icons.arrow_drop_down,
-                  onTap: () => context.bloc<SectionBloc>().add(
-                        SectionEvent.onMoveSection(section, 1),
-                      ),
-                  color: kPrimaryColor,
-                ),
-                CustomIconButton(
-                  iconData: Icons.arrow_drop_up,
-                  onTap: () => context.bloc<SectionBloc>().add(
-                        SectionEvent.onMoveSection(section, -1),
-                      ),
-                  color: kPrimaryColor,
-                ),
-                CustomIconButton(
-                  iconData: Icons.remove,
-                  onTap: () => context.bloc<SectionBloc>().add(
-                        SectionEvent.onRemoveSection(section),
-                      ),
-                  color: kPrimaryColor,
-                ),
-              ],
-            )
-          : Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                section.name,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: kPrimaryColor,
-                  fontWeight: FontWeight.w800,
-                ),
               ),
-            );
-    });
+      ),
+    );
   }
 }

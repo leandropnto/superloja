@@ -44,6 +44,8 @@ dependencies:
   dio: ^3.0.9
   brasil_fields: ^0.3.0
   geolocator: ^5.3.2+2
+  #Novo pacote para teste
+  get: ^3.4.6
 
 
 dev_dependencies:

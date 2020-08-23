@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:superloja/domain/cart/cart_failures.dart';
 import 'package:superloja/domain/cart/cart_item.dart';
 import 'package:superloja/domain/cart/cart_product.dart';
@@ -8,21 +7,18 @@ import 'package:superloja/domain/cart/i_cart_repository.dart';
 import 'package:superloja/infrastructure/cart/cart_item_dto.dart';
 import 'package:superloja/infrastructure/core/firebase_helpers.dart';
 
-@Singleton(as: ICartRepository)
 class FirebaseCartRepository implements ICartRepository {
   final Firestore _firestore;
 
   FirebaseCartRepository(this._firestore);
 
   @override
-  Stream<Either<CartFailures, List<CartItem>>> watchCart() async* {
+  Stream<List<CartItem>> watchCart() async* {
     final userDoc = await _firestore.userDocument();
     yield* userDoc.collection("cart").snapshots().map(
-          (snapshot) => right(
-            snapshot.documents
-                .map((doc) => CartItemDto.fromFirestore(doc).toDomain())
-                .toList(),
-          ),
+          (snapshot) => snapshot.documents
+              .map((doc) => CartItemDto.fromFirestore(doc).toDomain())
+              .toList(),
         );
   }
 
@@ -57,7 +53,7 @@ class FirebaseCartRepository implements ICartRepository {
     try {
       final cartReference =
           userDoc.collection("cart").document(item.id.getOrCrash());
-      final quantity =  item.quantity - 1;
+      final quantity = item.quantity - 1;
       if (quantity <= 0) {
         await cartReference.delete();
       } else {

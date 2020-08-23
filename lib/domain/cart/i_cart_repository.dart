@@ -4,7 +4,7 @@ import 'package:superloja/domain/cart/cart_item.dart';
 import 'package:superloja/domain/cart/cart_product.dart';
 
 abstract class ICartRepository {
-  Stream<Either<CartFailures, List<CartItem>>> watchCart();
+  Stream<List<CartItem>> watchCart();
   Future<Option<Either<CartFailures, Unit>>> addToCart(CartProduct item);
   Future<Option<Either<CartFailures, Unit>>> removeToCart(CartProduct item);
 }

@@ -16,32 +16,38 @@ class RoundedInputField extends StatelessWidget {
   final bool autoFocus;
   final TextInputAction textInputAction;
   final String initialvalue;
+  final TextEditingController controller;
+  final void Function(String) onSaved;
+  final String Function(String) onValidate;
 
-  const RoundedInputField({
-    Key key,
-    this.hintText,
-    this.icon = const Icon(Icons.person),
-    this.onChanged,
-    this.enabled = true,
-    this.autocorrect = false,
-    this.keyboardType,
-    this.errorText,
-    this.obscure = false,
-    this.onSubmitted,
-    this.autoFocus = false,
-    this.textInputAction = TextInputAction.done,
-    this.initialvalue = "",
-
-  }) : super(key: key);
+  const RoundedInputField(
+      {Key key,
+      this.hintText,
+      this.icon = const Icon(Icons.person),
+      this.onChanged,
+      this.enabled = true,
+      this.autocorrect = false,
+      this.keyboardType,
+      this.errorText,
+      this.obscure = false,
+      this.onSubmitted,
+      this.autoFocus = false,
+      this.textInputAction = TextInputAction.done,
+      this.initialvalue = "",
+      this.controller,
+      this.onSaved,
+      this.onValidate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        initialValue: initialvalue,
+        controller: controller,
+        onSaved: onSaved,
+        onChanged: onChanged,
         enabled: enabled,
         autocorrect: autocorrect,
-        onChanged: onChanged,
         cursorColor: kPrimaryColor,
         keyboardType: keyboardType,
         obscureText: obscure,
@@ -54,6 +60,7 @@ class RoundedInputField extends StatelessWidget {
           errorText: errorText,
         ),
         onFieldSubmitted: onSubmitted,
+        validator: onValidate,
       ),
     );
   }
