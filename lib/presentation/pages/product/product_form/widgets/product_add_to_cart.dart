@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/get.dart';
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
 class ProductAddToCart extends StatelessWidget {
+  final ProductFormBloc bloc = ProductFormBloc.to;
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductFormBloc, ProductFormState>(
-      builder: (context, state) => Container(
+    return Obx(
+      () => Container(
         margin: const EdgeInsets.symmetric(vertical: 16),
         height: 60,
         child: RaisedButton.icon(
@@ -18,17 +20,11 @@ class ProductAddToCart extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
           ),
-//          onPressed: !state.isSubmitting && state.size != null
-//              ? () {
-//                  context.bloc<CartBloc>().add(CartEvent.add(CartProduct(
-//                      product: state.product,
-//                      size: state.size,
-//                      quantity: 1,
-//                      id: UniqueId())));
-//                }
-//              : null,
+          onPressed: !bloc.isLoading.value && bloc.size.value.isSome()
+              ? () => bloc.addToCart()
+              : null,
           icon: const Icon(FontAwesome.cart_plus),
-          label: state.isSubmitting
+          label: bloc.isLoading.value
               ? const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.white),
                 )

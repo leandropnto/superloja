@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:superloja/presentation/core/widgets/rounded_input_field.dart';
 
 class SearchDialog extends StatelessWidget {
@@ -26,7 +27,7 @@ class SearchDialog extends StatelessWidget {
                 },
               ),
               onSubmitted: (value) {
-                Navigator.of(context).pop(value);
+                Get.back(result: value);
               },
             ),
           ),

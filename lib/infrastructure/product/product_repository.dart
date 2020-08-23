@@ -5,12 +5,11 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
-import 'package:superloja/infrastructure/core/file_helpers.dart';
 import 'package:superloja/domain/product/product.dart';
 import 'package:superloja/domain/product/product_failure.dart';
+import 'package:superloja/infrastructure/core/file_helpers.dart';
 import 'package:superloja/infrastructure/product/product_dto.dart';
 import 'package:uuid/uuid.dart';
-
 
 @Singleton(as: IProductRepository)
 class ProductRepository implements IProductRepository {
@@ -22,13 +21,11 @@ class ProductRepository implements IProductRepository {
         assert(_firebaseStorage != null);
 
   @override
-  Stream<Either<ProductFailure, List<Product>>> watchProducts() async* {
+  Stream<List<Product>> watchProducts() async* {
     yield* _firestore.collection("products").snapshots().map(
-          (snapshot) => right(
-            snapshot.documents
-                .map((doc) => ProductDto.fromFirestore(doc).toDomain())
-                .toList(),
-          ),
+          (snapshot) => snapshot.documents
+              .map((doc) => ProductDto.fromFirestore(doc).toDomain())
+              .toList(),
         );
   }
 
@@ -54,7 +51,8 @@ class ProductRepository implements IProductRepository {
       final reference = _firebaseStorage
           .ref()
           .child('images/products/${product.id.getOrCrash()}')
-          .child('product_${product.id.getOrCrash()}_${Uuid().v1()}_${f.fileName}');
+          .child(
+              'product_${product.id.getOrCrash()}_${Uuid().v1()}_${f.fileName}');
 
       await reference.putFile(f).onComplete;
       return reference.getDownloadURL();

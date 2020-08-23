@@ -6,6 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
+import 'package:superloja/application/product/product_form/product_form_bloc.dart';
+import 'package:superloja/application/product/product_list/product_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
 import 'package:superloja/domain/auth/i_auth_facade.dart';
 import 'package:superloja/domain/cart/i_cart_repository.dart';
@@ -41,5 +43,11 @@ class AppBinginds extends Bindings {
     Get.put<SectionBloc>(SectionBloc(Get.find(), Get.find()));
     Get.lazyPut<ICartRepository>(() => FirebaseCartRepository(Get.find()));
     Get.put<AuthBloc>(AuthBloc(Get.find()));
+
+    Get.lazyPut<IProductRepository>(
+        () => ProductRepository(Get.find(), Get.find()));
+
+    Get.lazyPut<ProductBloc>(() => ProductBloc(Get.find()));
+    Get.lazyPut<ProductFormBloc>(() => ProductFormBloc(Get.find()));
   }
 }

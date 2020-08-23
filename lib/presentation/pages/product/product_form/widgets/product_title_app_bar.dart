@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 
 class ProductTitleAppBar extends StatelessWidget {
+  final ProductFormBloc bloc = ProductFormBloc.to;
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductFormBloc, ProductFormState>(
-      builder: (context, state) => Text(
-        state.product.name.value.fold(
-          (f) => "Nome do produto inválido",
-          (r) => r,
-        ),
-      ),
+    return Obx(
+      () => Text(
+          bloc.product.value.name.value.fold((l) => "Carregando...", (r) => r)),
     );
   }
 }

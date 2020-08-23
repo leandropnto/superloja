@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/domain/product/product.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
@@ -15,10 +17,14 @@ class ProductsWidget extends StatelessWidget {
         itemBuilder: (_, index) {
           final product = products[index];
           return GestureDetector(
-            onTap: () => Navigator.of(context).pushNamed(
-              "/productByProduct",
-              arguments: product,
-            ),
+            onTap: () {
+              Get.put<ProductFormBloc>(ProductFormBloc(Get.find()));
+              Get.toNamed(
+                "/productByProduct",
+                arguments: product,
+              );
+              Get.find<ProductFormBloc>().load(product.id.getOrCrash());
+            },
             child: Card(
               child: Container(
                 height: 100,

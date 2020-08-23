@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:superloja/domain/cart/cart_item.dart';
+import 'package:superloja/domain/cart/cart_product.dart';
 import 'package:superloja/domain/cart/i_cart_repository.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
+import 'package:superloja/presentation/core/get_extensions.dart';
 
 class CartBloc extends GetxController {
   final ICartRepository _cartRepository;
@@ -23,6 +25,20 @@ class CartBloc extends GetxController {
 
   Stream<Iterable<CartItem>> loadItems() {
     return _cartRepository.watchCart();
+  }
+
+  Future<void> add(CartProduct cartProduct) async {
+    final result = await _cartRepository.addToCart(cartProduct);
+    result.fold(
+      () => showAppSnackBar("Ops...Algo deu errado!"),
+      (a) => a.fold(
+          (l) => showAppSnackBar(
+                l.map(
+                    createError: (e) => "Erro adicionando ao carrinho!",
+                    removeError: (e) => "Erro removendo do carrinho"),
+              ),
+          (r) => showAppSnackBar("Produto adicionado!")),
+    );
   }
 //  @override
 //  Stream<CartState> mapEventToState(
