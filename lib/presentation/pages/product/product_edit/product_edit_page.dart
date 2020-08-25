@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/presentation/pages/product/product_edit/widgets/product_edit_text_price.dart';
 import 'package:superloja/presentation/pages/product/product_edit/widgets/product_name_text.dart';
@@ -20,8 +21,10 @@ class ProductEditPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(bloc.product.value.name.value
-            .fold((l) => "Nome inválido", (r) => r)),
+        title: Obx(
+          () => Text(bloc.product.value.name.value
+              .fold((l) => "Nome inválido", (r) => r)),
+        ),
         centerTitle: true,
       ),
       body: Form(
@@ -30,7 +33,6 @@ class ProductEditPage extends StatelessWidget {
           children: <Widget>[
             ImagesForm(
               key: ObjectKey(bloc.photos),
-              images: bloc.photos.value,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -40,7 +42,7 @@ class ProductEditPage extends StatelessWidget {
                   ProductNameText(),
                   ProductEditTextPrice(),
                   ProductEditDescription(bloc.product.value.description),
-                  SizesForm(sizes: bloc.sizes.value),
+                  SizesForm(),
                   ProductSaveButton(),
                 ],
               ),

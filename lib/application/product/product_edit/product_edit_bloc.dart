@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:superloja/domain/product/i_product_repository.dart';
 import 'package:superloja/domain/product/product.dart';
@@ -20,10 +21,15 @@ class ProductEditBloc extends GetxController {
   RxBool isSubmitting = false.obs;
 
   Future<void> load(String id) async {
+    debugPrint("Carregando $id");
     final result = await _productRepository.getProduct(id);
     result.fold(
       (l) => showAppSnackBar("Ops... ocorreu um erro carregando o produto!"),
-      (r) => product.value = r,
+      (r) {
+        product.value = r;
+        photos.value = r.images;
+        sizes.value = r.sizes;
+      },
     );
   }
 

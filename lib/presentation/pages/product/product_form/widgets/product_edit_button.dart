@@ -6,7 +6,6 @@ import 'package:superloja/application/product/product_form/product_form_bloc.dar
 
 class ProductEditButton extends StatelessWidget {
   final AuthBloc auth = AuthBloc.to;
-  final ProductEditBloc edit = ProductEditBloc.to;
   final ProductFormBloc bloc = ProductFormBloc.to;
 
   @override
@@ -16,8 +15,11 @@ class ProductEditButton extends StatelessWidget {
           ? IconButton(
               icon: const Icon(Icons.edit),
               onPressed: () {
-                Get.toNamed("/products/edit");
-                edit.load(bloc.product.value.id.getOrCrash());
+                Get.toNamed(
+                    "/products/edit/${bloc.product.value.id.getOrCrash()}");
+
+                Get.put<ProductEditBloc>(ProductEditBloc(Get.find()))
+                    .load(bloc.product.value.id.getOrCrash());
               })
           : Container(),
     );

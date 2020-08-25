@@ -18,12 +18,12 @@ class ProductsWidget extends StatelessWidget {
           final product = products[index];
           return GestureDetector(
             onTap: () {
-              Get.put<ProductFormBloc>(ProductFormBloc(Get.find()));
               Get.toNamed(
-                "/productByProduct",
-                arguments: product,
+                "/productByProduct/${product.id.getOrCrash()}",
               );
-              Get.find<ProductFormBloc>().load(product.id.getOrCrash());
+              debugPrint(product.name.getOrCrash());
+              Get.put<ProductFormBloc>(ProductFormBloc(Get.find()))
+                  .load(product.id.getOrCrash());
             },
             child: Card(
               child: Container(

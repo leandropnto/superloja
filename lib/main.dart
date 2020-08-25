@@ -36,9 +36,10 @@ void main() {
           GetPage(name: '/home', page: () => HomePage()),
           GetPage(name: '/signin', page: () => SignInPage()),
           GetPage(name: '/products', page: () => ProductListPage()),
-          GetPage(name: '/products/edit', page: () => ProductEditPage()),
+          GetPage(name: '/products/edit/:uid', page: () => ProductEditPage()),
           GetPage(
-              name: '/productByProduct', page: () => const ProductFormPage()),
+              name: '/productByProduct/:uid',
+              page: () => const ProductFormPage()),
         ]),
   );
 }

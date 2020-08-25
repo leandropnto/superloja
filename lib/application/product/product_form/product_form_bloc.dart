@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/domain/cart/cart_product.dart';
@@ -23,6 +24,7 @@ class ProductFormBloc extends GetxController {
   Rx<Option<ProductSize>> size = none<ProductSize>().obs;
 
   Future<void> load(String id) async {
+    debugPrint("Carregando $id");
     isLoading.value = true;
     final result = await _productRepository.getProduct(id);
     result.fold(
