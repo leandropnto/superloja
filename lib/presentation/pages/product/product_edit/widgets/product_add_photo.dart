@@ -2,17 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/pages/product/product_edit/widgets/image_source_sheet.dart';
 
 class ProductAddPhoto extends StatelessWidget {
+  final ProductEditBloc bloc = ProductEditBloc.to;
+
   @override
   Widget build(BuildContext context) {
     void onImageSelected(File file) {
-      context.bloc<ProductEditBloc>().add(ProductEditEvent.addImage(file));
+      bloc.addImage(file);
     }
 
     return Material(

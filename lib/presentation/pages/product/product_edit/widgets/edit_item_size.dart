@@ -1,7 +1,6 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/domain/product/value_objects.dart';
@@ -14,7 +13,9 @@ class EditItemSize extends StatelessWidget {
   final bool isFirst;
   final bool isLast;
 
-  const EditItemSize({
+  final ProductEditBloc bloc = ProductEditBloc.to;
+
+  EditItemSize({
     Key key,
     this.size,
     this.isFirst = false,
@@ -82,29 +83,18 @@ class EditItemSize extends StatelessWidget {
           width: 4,
         ),
         CustomIconButton(
-          iconData: FontAwesome.remove,
-          color: Colors.red,
-          onTap: () => context
-              .bloc<ProductEditBloc>()
-              .add(ProductEditEvent.removeSize(size.toSize())),
-        ),
+            iconData: FontAwesome.remove,
+            color: Colors.red,
+            onTap: () => bloc.removeSize(size.toSize())),
         CustomIconButton(
           iconData: Icons.arrow_drop_up,
           color: kPrimaryColor,
-          onTap: !isFirst
-              ? () => context
-                  .bloc<ProductEditBloc>()
-                  .add(ProductEditEvent.moveSize(size.toSize(), -1))
-              : null,
+          onTap: !isFirst ? () => bloc.moveSize(size.toSize(), -1) : null,
         ),
         CustomIconButton(
           iconData: Icons.arrow_drop_down,
           color: kPrimaryColor,
-          onTap: !isLast
-              ? () => context
-                  .bloc<ProductEditBloc>()
-                  .add(ProductEditEvent.moveSize(size.toSize(), 1))
-              : null,
+          onTap: !isLast ? () => bloc.moveSize(size.toSize(), 1) : null,
         ),
       ],
     );

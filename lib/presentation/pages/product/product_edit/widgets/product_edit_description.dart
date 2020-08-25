@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/domain/product/value_objects.dart';
 import 'package:superloja/presentation/core/constants.dart';
 
 class ProductEditDescription extends StatelessWidget {
   final ProductDescription description;
+  final ProductEditBloc bloc = ProductEditBloc.to;
+
+  ProductEditDescription(this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +36,13 @@ class ProductEditDescription extends StatelessWidget {
             ),
             validator: (desc) => ProductDescription(desc)
                 .mapToErrorMessage("Descrição inválida"),
-            onSaved: (value) => context
-                .bloc<ProductEditBloc>()
-                .add(ProductEditEvent.onChangeDescription(value)),
+            onSaved: (value) =>
+                bloc.product.value = bloc.product.value.copyWith(
+              description: ProductDescription(value),
+            ),
           ),
         ],
       ),
     );
   }
-
-  const ProductEditDescription(this.description);
 }

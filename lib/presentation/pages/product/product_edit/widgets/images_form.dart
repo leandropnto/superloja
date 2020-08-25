@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/presentation/core/constants.dart';
@@ -10,8 +9,9 @@ import 'package:superloja/presentation/pages/product/product_edit/widgets/produc
 
 class ImagesForm extends StatelessWidget {
   final List<dynamic> images;
+  final ProductEditBloc bloc = ProductEditBloc.to;
 
-  const ImagesForm({Key key, this.images}) : super(key: key);
+  ImagesForm({Key key, this.images}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,7 @@ class ImagesForm extends StatelessWidget {
       initialValue: [...images],
       validator: (images) =>
           images.isEmpty ? "Insira ao menos uma imagem" : null,
-      onSaved: (images) => context
-          .bloc<ProductEditBloc>()
-          .add(ProductEditEvent.onSaveImages(images)),
+      onSaved: (images) => bloc.saveImages(images),
       builder: (state) => Column(
         children: <Widget>[
           AspectRatio(
@@ -53,9 +51,7 @@ class ImagesForm extends StatelessWidget {
                               color: Colors.red,
                             ),
                             onPressed: () {
-                              context
-                                  .bloc<ProductEditBloc>()
-                                  .add(ProductEditEvent.removeImage(i));
+                              bloc.removeImage(i);
                             },
                           ),
                         ),

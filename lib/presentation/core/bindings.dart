@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:superloja/application/auth/auth_bloc.dart';
 import 'package:superloja/application/cart/cart_bloc.dart';
 import 'package:superloja/application/drawer/drawer_bloc.dart';
+import 'package:superloja/application/product/product_edit/product_edit_bloc.dart';
 import 'package:superloja/application/product/product_form/product_form_bloc.dart';
 import 'package:superloja/application/product/product_list/product_bloc.dart';
 import 'package:superloja/application/section/section_bloc.dart';
@@ -49,5 +50,6 @@ class AppBinginds extends Bindings {
 
     Get.lazyPut<ProductBloc>(() => ProductBloc(Get.find()));
     Get.lazyPut<ProductFormBloc>(() => ProductFormBloc(Get.find()));
+    Get.lazyPut<ProductEditBloc>(() => ProductEditBloc(Get.find()));
   }
 }

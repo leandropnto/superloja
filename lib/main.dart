@@ -5,6 +5,7 @@ import 'package:superloja/presentation/core/bindings.dart';
 import 'package:superloja/presentation/core/constants.dart';
 import 'package:superloja/presentation/pages/auth/signin/signin_page.dart';
 import 'package:superloja/presentation/pages/home/home_page.dart';
+import 'package:superloja/presentation/pages/product/product_edit/product_edit_page.dart';
 import 'package:superloja/presentation/pages/product/product_form/product_form_page.dart';
 import 'package:superloja/presentation/pages/product/product_list/product_list_page.dart';
 import 'package:superloja/presentation/pages/splash/splash_page.dart';
@@ -35,6 +36,7 @@ void main() {
           GetPage(name: '/home', page: () => HomePage()),
           GetPage(name: '/signin', page: () => SignInPage()),
           GetPage(name: '/products', page: () => ProductListPage()),
+          GetPage(name: '/products/edit', page: () => ProductEditPage()),
           GetPage(
               name: '/productByProduct', page: () => const ProductFormPage()),
         ]),
